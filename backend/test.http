@@ -32,3 +32,66 @@ Content-Type: application/json
     "email": "newstudent@test.com",
     "password": "wrongpassword"
 }
+
+### Register Mentor
+POST http://localhost:5000/api/mentors
+Content-Type: application/json
+
+{
+    "first_name": "Test",
+    "last_name": "Mentor",
+    "email": "testmentor@test.com",
+    "password": "mentor123",
+    "phone": "9876543210",
+    "expertise": ["Artificial Intelligence", "Web Development"],
+    "organization": "InnoBridge",
+    "designation": "Technical Mentor",
+    "experience": 5,
+    "bio": "Test mentor",
+    "profile_photo": ""
+}
+
+### Mentor Login
+POST http://localhost:5000/api/mentor-login
+Content-Type: application/json
+
+{
+    "email": "testmentor@test.com",
+    "password": "mentor123"
+}
+
+### Mentor Login - Wrong Password
+POST http://localhost:5000/api/mentor-login
+Content-Type: application/json
+
+{
+    "email": "testmentor@test.com",
+    "password": "wrongpassword"
+}
+
+### Authentication Test
+GET http://localhost:5000/api/auth-test
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdHVkZW50X2lkIjo0LCJlbWFpbCI6Im5ld3N0dWRlbnRAdGVzdC5jb20iLCJyb2xlIjoic3R1ZGVudCIsImlhdCI6MTc5MDI2OTgzOCwiZXhwIjoxNzkwMjczNDM4fQ.kOLR2Tpi32n7j33oZMy9U9zjhRbbugR5GZL76QCjAEY
+
+### Authentication Test - No Token
+GET http://localhost:5000/api/auth-test
+
+### Create Idea
+POST http://localhost:5000/api/ideas
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdHVkZW50X2lkIjo0LCJlbWFpbCI6Im5ld3N0dWRlbnRAdGVzdC5jb20iLCJyb2xlIjoic3R1ZGVudCIsImlhdCI6MTc5MDI2OTgzOCwiZXhwIjoxNzkwMjczNDM4fQ.kOLR2Tpi32n7j33oZMy9U9zjhRbbugR5GZL76QCjAEY
+
+
+{
+    "title": "Smart Campus Assistant",
+    "description": "An application to help students manage campus activities",
+    "category": "Education",
+    "requiredSkills": ["Java", "Python"],
+    "technologyStack": ["Node.js", "MongoDB"],
+    "problemStatement": "Students find it difficult to manage campus information",
+    "expectedOutcome": "A centralized platform for campus information",
+    "status": "open"
+}
+
+### Get All Public Ideas
+GET http://localhost:5000/api/ideas
