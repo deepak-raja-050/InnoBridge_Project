@@ -95,3 +95,25 @@ Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdHVkZW50X2lkIjo0L
 
 ### Get All Public Ideas
 GET http://localhost:5000/api/ideas
+
+### Create Team
+POST http://localhost:5000/api/teams
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdHVkZW50X2lkIjo0LCJlbWFpbCI6Im5ld3N0dWRlbnRAdGVzdC5jb20iLCJyb2xlIjoic3R1ZGVudCIsImlhdCI6MTc5MDI3MzQ3NywiZXhwIjoxNzkwMjc3MDc3fQ.kJ7xDG_9JwwBzfrpdiMw6f2FpHBJM63Ho9ER-OqJlZU
+
+{
+    "idea_id": "PASTE_MONGODB_OBJECT_ID_HERE",
+    "team_name": "Smart Campus Team",
+    "team_description": "Team working on the Smart Campus Assistant idea"
+}
+
+### Create Team
+POST http://localhost:5000/api/teams
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdHVkZW50X2lkIjo0LCJlbWFpbCI6Im5ld3N0dWRlbnRAdGVzdC5jb20iLCJyb2xlIjoic3R1ZGVudCIsImlhdCI6MTc5MDI3MzQ3NywiZXhwIjoxNzkwMjc3MDc3fQ.kJ7xDG_9JwwBzfrpdiMw6f2FpHBJM63Ho9ER-OqJlZU
+
+{
+    "idea_id": "6ab55a2b780cc5fcd1b540d5",
+    "team_name": "Smart Campus Team",
+    "team_description": "Team working on the Smart Campus Assistant idea"
+}

@@ -2,7 +2,7 @@ require("dotenv").config();
 
 const express = require("express");
 const cors = require("cors");
-const { MongoClient } = require("mongodb");
+const { MongoClient, ObjectId } = require("mongodb");
 const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
 
@@ -354,6 +354,70 @@ app.post("/api/mentors", async (req, res) => {
     }
 });
 
+app.post("/api/teams", authenticateToken, async (req, res) => {
+    try {
+        if (req.user.role !== "student") {
+            return res.status(403).json({
+                message: "Only students can create teams"
+            });
+        }
+
+        const {
+            idea_id,
+            team_name,
+            team_description
+        } = req.body;
+
+        const student_id = req.user.student_id;
+
+        const idea = await db.collection("ideas").findOne({
+            _id: new ObjectId(idea_id)
+        });
+
+        if (!idea) {
+            return res.status(404).json({
+                message: "Idea not found"
+            });
+        }
+
+        if (idea.student_id !== student_id) {
+            return res.status(403).json({
+                message: "You can only create a team for your own idea"
+            });
+        }
+
+        const lastTeam = await db.collection("teams")
+            .find({})
+            .sort({ team_id: -1 })
+            .limit(1)
+            .toArray();
+
+        const nextTeamId =
+            lastTeam.length > 0 ? lastTeam[0].team_id + 1 : 1;
+
+        const team = {
+            team_id: nextTeamId,
+            idea_id: idea_id,
+            team_name: team_name,
+            team_description: team_description,
+            created_at: new Date()
+        };
+
+        await db.collection("teams").insertOne(team);
+
+        res.status(201).json({
+            message: "Team created successfully",
+            team_id: team.team_id
+        });
+
+    } catch (error) {
+        console.error(error);
+
+        res.status(500).json({
+            message: "Failed to create team"
+        });
+    }
+});
 app.get("/api/auth-test", authenticateToken, (req, res) => {
     res.json({
         message: "Authentication successful",
