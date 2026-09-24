@@ -1,0 +1,34 @@
+### Register Student
+POST http://localhost:5000/api/students
+Content-Type: application/json
+
+{
+    "first_name": "New",
+    "last_name": "Student",
+    "email": "newstudent@test.com",
+    "password": "student123",
+    "phone": "9876543210",
+    "department": "Information Technology",
+    "year": 3,
+    "skills": ["Java", "JavaScript"],
+    "bio": "Test student",
+    "profile_photo": ""
+}
+
+### Student Login
+POST http://localhost:5000/api/login
+Content-Type: application/json
+
+{
+    "email": "newstudent@test.com",
+    "password": "student123"
+}
+
+### Student Login - Wrong Password
+POST http://localhost:5000/api/login
+Content-Type: application/json
+
+{
+    "email": "newstudent@test.com",
+    "password": "wrongpassword"
+}
