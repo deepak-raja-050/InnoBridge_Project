@@ -418,6 +418,223 @@ app.post("/api/teams", authenticateToken, async (req, res) => {
         });
     }
 });
+
+app.post("/api/team-members", authenticateToken, async (req, res) => {
+    try {
+        if (req.user.role !== "student") {
+            return res.status(403).json({
+                message: "Only students can add team members"
+            });
+        }
+
+        const {
+            team_id,
+            student_id
+        } = req.body;
+
+        const loggedInStudentId = req.user.student_id;
+
+        const team = await db.collection("teams").findOne({
+            team_id: parseInt(team_id)
+        });
+
+        if (!team) {
+            return res.status(404).json({
+                message: "Team not found"
+            });
+        }
+
+        const idea = await db.collection("ideas").findOne({
+            _id: new ObjectId(team.idea_id)
+        });
+
+        if (!idea) {
+            return res.status(404).json({
+                message: "Associated idea not found"
+            });
+        }
+
+        if (idea.student_id !== loggedInStudentId) {
+            return res.status(403).json({
+                message: "Only the idea owner can add team members"
+            });
+        }
+
+        const student = await db.collection("students").findOne({
+            student_id: parseInt(student_id)
+        });
+
+        if (!student) {
+            return res.status(404).json({
+                message: "Student not found"
+            });
+        }
+
+        const existingMember = await db.collection("team_members").findOne({
+            team_id: parseInt(team_id),
+            student_id: parseInt(student_id)
+        });
+
+        if (existingMember) {
+            return res.status(400).json({
+                message: "Student is already a team member"
+            });
+        }
+
+        const memberCount = await db.collection("team_members").countDocuments();
+
+        const teamMember = {
+            team_member_id: memberCount + 1,
+            team_id: parseInt(team_id),
+            student_id: parseInt(student_id),
+            joined_at: new Date()
+        };
+
+        await db.collection("team_members").insertOne(teamMember);
+
+        res.status(201).json({
+            message: "Team member added successfully",
+            team_member_id: teamMember.team_member_id
+        });
+
+    } catch (error) {
+        console.error(error);
+
+        res.status(500).json({
+            message: "Failed to add team member"
+        });
+    }
+});app.post("/api/team-members", authenticateToken, async (req, res) => {
+    try {
+        if (req.user.role !== "student") {
+            return res.status(403).json({
+                message: "Only students can add team members"
+            });
+        }
+
+        const {
+            team_id,
+            student_id
+        } = req.body;
+
+        const loggedInStudentId = req.user.student_id;
+
+        const team = await db.collection("teams").findOne({
+            team_id: parseInt(team_id)
+        });
+
+        if (!team) {
+            return res.status(404).json({
+                message: "Team not found"
+            });
+        }
+
+        const idea = await db.collection("ideas").findOne({
+            _id: new ObjectId(team.idea_id)
+        });
+
+        if (!idea) {
+            return res.status(404).json({
+                message: "Associated idea not found"
+            });
+        }
+
+        if (idea.student_id !== loggedInStudentId) {
+            return res.status(403).json({
+                message: "Only the idea owner can add team members"
+            });
+        }
+
+        const student = await db.collection("students").findOne({
+            student_id: parseInt(student_id)
+        });
+
+        if (!student) {
+            return res.status(404).json({
+                message: "Student not found"
+            });
+        }
+
+        const existingMember = await db.collection("team_members").findOne({
+            team_id: parseInt(team_id),
+            student_id: parseInt(student_id)
+        });
+
+        if (existingMember) {
+            return res.status(400).json({
+                message: "Student is already a team member"
+            });
+        }
+
+        const memberCount = await db.collection("team_members").countDocuments();
+
+        const teamMember = {
+            team_member_id: memberCount + 1,
+            team_id: parseInt(team_id),
+            student_id: parseInt(student_id),
+            joined_at: new Date()
+        };
+
+        await db.collection("team_members").insertOne(teamMember);
+
+        res.status(201).json({
+            message: "Team member added successfully",
+            team_member_id: teamMember.team_member_id
+        });
+
+    } catch (error) {
+        console.error(error);
+
+        res.status(500).json({
+            message: "Failed to add team member"
+        });
+    }
+});
+app.post("/api/progress", authenticateToken, async (req, res) => {
+    try {
+        if (req.user.role !== "student") {
+            return res.status(403).json({
+                message: "Only students can update progress"
+            });
+        }
+
+        const { team_id, progress_percentage, description } = req.body;
+
+        const team = await db.collection("teams").findOne({
+            team_id: parseInt(team_id)
+        });
+
+        if (!team) {
+            return res.status(404).json({
+                message: "Team not found"
+            });
+        }
+
+        const progressCount = await db.collection("progress").countDocuments();
+
+        const progress = {
+            progress_id: progressCount + 1,
+            team_id: parseInt(team_id),
+            progress_percentage: progress_percentage,
+            description: description,
+            updated_at: new Date()
+        };
+
+        await db.collection("progress").insertOne(progress);
+
+        res.status(201).json({
+            message: "Progress updated successfully",
+            progress_id: progress.progress_id
+        });
+
+    } catch (error) {
+        console.error(error);
+
+        res.status(500).json({
+            message: "Failed to update progress"
+        });
+    }
+});
 app.get("/api/auth-test", authenticateToken, (req, res) => {
     res.json({
         message: "Authentication successful",
@@ -445,6 +662,180 @@ app.get("/api/ideas", async (req, res) => {
         console.error(error);
         res.status(500).json({
             message: "Server error"
+        });
+    }
+});
+
+app.get("/api/teams", authenticateToken, async (req, res) => {
+    try {
+        const teams = await db.collection("teams")
+            .find({})
+            .toArray();
+
+        res.status(200).json(teams);
+
+    } catch (error) {
+        console.error(error);
+
+        res.status(500).json({
+            message: "Failed to fetch teams"
+        });
+    }
+});
+app.get("/api/team-members", authenticateToken, async (req, res) => {
+    try {
+        const teamMembers = await db.collection("team_members")
+            .find({})
+            .toArray();
+
+        res.status(200).json(teamMembers);
+
+    } catch (error) {
+        console.error(error);
+
+        res.status(500).json({
+            message: "Failed to fetch team members"
+        });
+    }
+});
+app.get("/api/student/teams", authenticateToken, async (req, res) => {
+    try {
+        if (req.user.role !== "student") {
+            return res.status(403).json({
+                message: "Only students can view their teams"
+            });
+        }
+
+        const student_id = req.user.student_id;
+
+        const memberships = await db.collection("team_members")
+            .find({ student_id: student_id })
+            .toArray();
+
+        const teamIds = memberships.map(member => member.team_id);
+
+        const teams = await db.collection("teams")
+            .find({ team_id: { $in: teamIds } })
+            .toArray();
+
+        res.status(200).json(teams);
+
+    } catch (error) {
+        console.error(error);
+
+        res.status(500).json({
+            message: "Failed to fetch student teams"
+        });
+    }
+});
+app.get("/api/teams/:team_id", authenticateToken, async (req, res) => {
+    try {
+        const team_id = parseInt(req.params.team_id);
+
+        const team = await db.collection("teams").findOne({
+            team_id: team_id
+        });
+
+        if (!team) {
+            return res.status(404).json({
+                message: "Team not found"
+            });
+        }
+
+        const idea = await db.collection("ideas").findOne({
+            _id: new ObjectId(team.idea_id)
+        });
+
+        const members = await db.collection("team_members")
+            .find({ team_id: team_id })
+            .toArray();
+
+        res.status(200).json({
+            team: team,
+            idea: idea,
+            members: members
+        });
+
+    } catch (error) {
+        console.error(error);
+
+        res.status(500).json({
+            message: "Failed to fetch team details"
+        });
+    }
+});
+app.get("/api/progress/:team_id", authenticateToken, async (req, res) => {
+    try {
+        const team_id = parseInt(req.params.team_id);
+
+        const team = await db.collection("teams").findOne({
+            team_id: team_id
+        });
+
+        if (!team) {
+            return res.status(404).json({
+                message: "Team not found"
+            });
+        }
+
+        const progress = await db.collection("progress")
+            .find({ team_id: team_id })
+            .sort({ updated_at: -1 })
+            .toArray();
+
+        res.status(200).json(progress);
+
+    } catch (error) {
+        console.error(error);
+
+        res.status(500).json({
+            message: "Failed to fetch progress"
+        });
+    }
+});
+app.post("/api/feedback", authenticateToken, async (req, res) => {
+    try {
+        if (req.user.role !== "mentor") {
+            return res.status(403).json({
+                message: "Only mentors can provide feedback"
+            });
+        }
+
+        const { team_id, feedback } = req.body;
+        const mentor_id = req.user.mentor_id;
+
+        const team = await db.collection("teams").findOne({
+            team_id: parseInt(team_id)
+        });
+
+        if (!team) {
+            return res.status(404).json({
+                message: "Team not found"
+            });
+        }
+
+        const feedbackCount = await db.collection("feedback").countDocuments();
+
+        const feedbackData = {
+            feedback_id: feedbackCount + 1,
+            team_id: parseInt(team_id),
+            mentor_id: mentor_id,
+            feedback: feedback,
+            created_at: new Date()
+        };
+
+        await db.collection("feedback").insertOne(feedbackData);
+
+        res.status(201).json({
+            message: "Feedback submitted successfully",
+            feedback_id: feedbackData.feedback_id
+        });
+
+    } catch (error) {
+        console.error(error);
+
+        res.status(500).json({
+            message: "Failed to submit feedback"
         });
     }
 });

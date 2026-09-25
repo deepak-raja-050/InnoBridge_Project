@@ -117,3 +117,56 @@ Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdHVkZW50X2lkIjo0L
     "team_name": "Smart Campus Team",
     "team_description": "Team working on the Smart Campus Assistant idea"
 }
+
+### Add Student to Team
+POST http://localhost:5000/api/team-members
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdHVkZW50X2lkIjo0LCJlbWFpbCI6Im5ld3N0dWRlbnRAdGVzdC5jb20iLCJyb2xlIjoic3R1ZGVudCIsImlhdCI6MTc5MDI3MzQ3NywiZXhwIjoxNzkwMjc3MDc3fQ.kJ7xDG_9JwwBzfrpdiMw6f2FpHBJM63Ho9ER-OqJlZU
+
+
+{
+    "team_id": 7,
+    "student_id": 3
+}
+
+### Get All Teams
+GET http://localhost:5000/api/teams
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdHVkZW50X2lkIjo0LCJlbWFpbCI6Im5ld3N0dWRlbnRAdGVzdC5jb20iLCJyb2xlIjoic3R1ZGVudCIsImlhdCI6MTc5MDI3MzQ3NywiZXhwIjoxNzkwMjc3MDc3fQ.kJ7xDG_9JwwBzfrpdiMw6f2FpHBJM63Ho9ER-OqJlZU
+
+
+### Get All Team Members
+GET http://localhost:5000/api/team-members
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdHVkZW50X2lkIjo0LCJlbWFpbCI6Im5ld3N0dWRlbnRAdGVzdC5jb20iLCJyb2xlIjoic3R1ZGVudCIsImlhdCI6MTc5MDI3MzQ3NywiZXhwIjoxNzkwMjc3MDc3fQ.kJ7xDG_9JwwBzfrpdiMw6f2FpHBJM63Ho9ER-OqJlZU
+
+### Get My Teams
+GET http://localhost:5000/api/student/teams
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdHVkZW50X2lkIjo0LCJlbWFpbCI6Im5ld3N0dWRlbnRAdGVzdC5jb20iLCJyb2xlIjoic3R1ZGVudCIsImlhdCI6MTc5MDI3MzQ3NywiZXhwIjoxNzkwMjc3MDc3fQ.kJ7xDG_9JwwBzfrpdiMw6f2FpHBJM63Ho9ER-OqJlZU
+
+### Get Team Details
+GET http://localhost:5000/api/teams/7
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdHVkZW50X2lkIjo0LCJlbWFpbCI6Im5ld3N0dWRlbnRAdGVzdC5jb20iLCJyb2xlIjoic3R1ZGVudCIsImlhdCI6MTc5MDI3MzQ3NywiZXhwIjoxNzkwMjc3MDc3fQ.kJ7xDG_9JwwBzfrpdiMw6f2FpHBJM63Ho9ER-OqJlZU
+
+### Update Team Progress
+POST http://localhost:5000/api/progress
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdHVkZW50X2lkIjo0LCJlbWFpbCI6Im5ld3N0dWRlbnRAdGVzdC5jb20iLCJyb2xlIjoic3R1ZGVudCIsImlhdCI6MTc5MDI3MzQ3NywiZXhwIjoxNzkwMjc3MDc3fQ.kJ7xDG_9JwwBzfrpdiMw6f2FpHBJM63Ho9ER-OqJlZU
+Content-Type: application/json
+
+{
+    "team_id": 7,
+    "progress_percentage": 40,
+    "description": "Initial project development completed"
+}
+
+### Get Team Progress
+GET http://localhost:5000/api/progress/7
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdHVkZW50X2lkIjo0LCJlbWFpbCI6Im5ld3N0dWRlbnRAdGVzdC5jb20iLCJyb2xlIjoic3R1ZGVudCIsImlhdCI6MTc5MDI3MzQ3NywiZXhwIjoxNzkwMjc3MDc3fQ.kJ7xDG_9JwwBzfrpdiMw6f2FpHBJM63Ho9ER-OqJlZU
+
+### Submit Mentor Feedback
+POST http://localhost:5000/api/feedback
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJtZW50b3JfaWQiOjUsImVtYWlsIjoidGVzdG1lbnRvckB0ZXN0LmNvbSIsInJvbGUiOiJtZW50b3IiLCJpYXQiOjE3OTAyNzQ1NDAsImV4cCI6MTc5MDI3ODE0MH0.CbFF40QeI_JQUPZXzP1HWTatGvU3FbzwDXUQ7j99NB0
+Content-Type: application/json
+
+{
+    "team_id": 7,
+    "feedback": "The project idea is good. Improve the implementation plan and testing strategy."
+}
