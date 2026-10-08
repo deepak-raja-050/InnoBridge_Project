@@ -164,9 +164,106 @@ Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdHVkZW50X2lkIjo0L
 ### Submit Mentor Feedback
 POST http://localhost:5000/api/feedback
 Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJtZW50b3JfaWQiOjUsImVtYWlsIjoidGVzdG1lbnRvckB0ZXN0LmNvbSIsInJvbGUiOiJtZW50b3IiLCJpYXQiOjE3OTAyNzQ1NDAsImV4cCI6MTc5MDI3ODE0MH0.CbFF40QeI_JQUPZXzP1HWTatGvU3FbzwDXUQ7j99NB0
+
 Content-Type: application/json
 
 {
     "team_id": 7,
     "feedback": "The project idea is good. Improve the implementation plan and testing strategy."
 }
+
+### Send guidance request
+POST http://localhost:5000/api/collaboration-requests
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdHVkZW50X2lkIjo0LCJlbWFpbCI6Im5ld3N0dWRlbnRAdGVzdC5jb20iLCJyb2xlIjoic3R1ZGVudCIsImlhdCI6MTc5MTQ4NDE4MiwiZXhwIjoxNzkxNDg3NzgyfQ.4fpV_uKzVOkoOUxvB7C_YdVy_5hzVGC5oY-M9hR1P_I
+
+{
+    "idea_id": "6ab55a2b780cc5fcd1b540d5",
+    "mentor_id": 1
+}
+
+### Mentor views guidance requests
+GET http://localhost:5000/api/mentor/guidance-requests
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJtZW50b3JfaWQiOjUsImVtYWlsIjoidGVzdG1lbnRvckB0ZXN0LmNvbSIsInJvbGUiOiJtZW50b3IiLCJpYXQiOjE3OTE0ODQzODYsImV4cCI6MTc5MTQ4Nzk4Nn0.01PNDUZi0qs5oDeB2Eazd81m7-okT_jUUceatPaDQiU
+
+
+### Mentor accepts guidance request
+PUT http://localhost:5000/api/collaboration-requests/13/accept
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJtZW50b3JfaWQiOjUsImVtYWlsIjoidGVzdG1lbnRvckB0ZXN0LmNvbSIsInJvbGUiOiJtZW50b3IiLCJpYXQiOjE3OTE0ODQzODYsImV4cCI6MTc5MTQ4Nzk4Nn0.01PNDUZi0qs5oDeB2Eazd81m7-okT_jUUceatPaDQiU
+
+### Student views guidance requests
+GET http://localhost:5000/api/student/guidance-requests
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdHVkZW50X2lkIjo0LCJlbWFpbCI6Im5ld3N0dWRlbnRAdGVzdC5jb20iLCJyb2xlIjoic3R1ZGVudCIsImlhdCI6MTc5MTQ4NDE4MiwiZXhwIjoxNzkxNDg3NzgyfQ.4fpV_uKzVOkoOUxvB7C_YdVy_5hzVGC5oY-M9hR1P_I
+
+### Backend health check
+GET http://localhost:5000/
+
+### Student guidance requests
+GET http://localhost:5000/api/student/guidance-requests
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdHVkZW50X2lkIjo0LCJlbWFpbCI6Im5ld3N0dWRlbnRAdGVzdC5jb20iLCJyb2xlIjoic3R1ZGVudCIsImlhdCI6MTc5MTQ4NDE4MiwiZXhwIjoxNzkxNDg3NzgyfQ.4fpV_uKzVOkoOUxvB7C_YdVy_5hzVGC5oY-M9hR1P_I
+
+### Mentor guidance requests
+GET http://localhost:5000/api/mentor/guidance-requests
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJtZW50b3JfaWQiOjUsImVtYWlsIjoidGVzdG1lbnRvckB0ZXN0LmNvbSIsInJvbGUiOiJtZW50b3IiLCJpYXQiOjE3OTE0ODQzODYsImV4cCI6MTc5MTQ4Nzk4Nn0.01PNDUZi0qs5oDeB2Eazd81m7-okT_jUUceatPaDQiU
+
+### Create notification
+POST http://localhost:5000/api/notifications
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdHVkZW50X2lkIjo0LCJlbWFpbCI6Im5ld3N0dWRlbnRAdGVzdC5jb20iLCJyb2xlIjoic3R1ZGVudCIsImlhdCI6MTc5MTQ4NDE4MiwiZXhwIjoxNzkxNDg3NzgyfQ.4fpV_uKzVOkoOUxvB7C_YdVy_5hzVGC5oY-M9hR1P_I
+
+{
+    "user_id": 4,
+    "user_role": "student",
+    "message": "Your mentorship request has been accepted.",
+    "type": "mentorship"
+}
+
+### Get student notifications
+GET http://localhost:5000/api/student/notifications
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdHVkZW50X2lkIjo0LCJlbWFpbCI6Im5ld3N0dWRlbnRAdGVzdC5jb20iLCJyb2xlIjoic3R1ZGVudCIsImlhdCI6MTc5MTQ4NDE4MiwiZXhwIjoxNzkxNDg3NzgyfQ.4fpV_uKzVOkoOUxvB7C_YdVy_5hzVGC5oY-M9hR1P_I
+
+### Mark notification as read
+PUT http://localhost:5000/api/notifications/15/read
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdHVkZW50X2lkIjo0LCJlbWFpbCI6Im5ld3N0dWRlbnRAdGVzdC5jb20iLCJyb2xlIjoic3R1ZGVudCIsImlhdCI6MTc5MTQ4NDE4MiwiZXhwIjoxNzkxNDg3NzgyfQ.4fpV_uKzVOkoOUxvB7C_YdVy_5hzVGC5oY-M9hR1P_I
+
+### Mark all notifications as read
+PUT http://localhost:5000/api/notifications/read-all
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdHVkZW50X2lkIjo0LCJlbWFpbCI6Im5ld3N0dWRlbnRAdGVzdC5jb20iLCJyb2xlIjoic3R1ZGVudCIsImlhdCI6MTc5MTQ4NDE4MiwiZXhwIjoxNzkxNDg3NzgyfQ.4fpV_uKzVOkoOUxvB7C_YdVy_5hzVGC5oY-M9hR1P_I
+
+### Create privacy settings
+POST http://localhost:5000/api/privacy-settings
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdHVkZW50X2lkIjo0LCJlbWFpbCI6Im5ld3N0dWRlbnRAdGVzdC5jb20iLCJyb2xlIjoic3R1ZGVudCIsImlhdCI6MTc5MTQ4NDE4MiwiZXhwIjoxNzkxNDg3NzgyfQ.4fpV_uKzVOkoOUxvB7C_YdVy_5hzVGC5oY-M9hR1P_I
+
+{
+    "idea_id": 6ab55a2b780cc5fcd1b540d5
+    "visibility": "private"
+}
+
+### Create privacy settings
+POST http://localhost:5000/api/privacy-settings
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdHVkZW50X2lkIjo0LCJlbWFpbCI6Im5ld3N0dWRlbnRAdGVzdC5jb20iLCJyb2xlIjoic3R1ZGVudCIsImlhdCI6MTc5MTQ4NDE4MiwiZXhwIjoxNzkxNDg3NzgyfQ.4fpV_uKzVOkoOUxvB7C_YdVy_5hzVGC5oY-M9hR1P_I
+
+{
+    "idea_id": 7,
+    "visibility": "private"
+}
+
+### Create privacy settings
+POST http://localhost:5000/api/privacy-settings
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdHVkZW50X2lkIjo0LCJlbWFpbCI6Im5ld3N0dWRlbnRAdGVzdC5jb20iLCJyb2xlIjoic3R1ZGVudCIsImlhdCI6MTc5MTQ4NDE4MiwiZXhwIjoxNzkxNDg3NzgyfQ.4fpV_uKzVOkoOUxvB7C_YdVy_5hzVGC5oY-M9hR1P_I
+
+{
+    "idea_id": CORRECT_IDEA_ID,
+    "visibility": "private"
+}
+
+### Student views feedback
+GET http://localhost:5000/api/student/feedback
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdHVkZW50X2lkIjo0LCJlbWFpbCI6Im5ld3N0dWRlbnRAdGVzdC5jb20iLCJyb2xlIjoic3R1ZGVudCIsImlhdCI6MTc5MTQ4NDE4MiwiZXhwIjoxNzkxNDg3NzgyfQ.4fpV_uKzVOkoOUxvB7C_YdVy_5hzVGC5oY-M9hR1P_I
+
+### Mentor views feedback
+GET http://localhost:5000/api/mentor/feedback
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdHVkZW50X2lkIjo0LCJlbWFpbCI6Im5ld3N0dWRlbnRAdGVzdC5jb20iLCJyb2xlIjoibWVudG9yIiwiaWF0IjoxNzkxNDg0MTgyLCJleHAiOjE3OTE0ODczODJ9.1V9f3uQzVpKoOUxvB7C_YdVy_5hzVGC5oY-M9hR1P_I
