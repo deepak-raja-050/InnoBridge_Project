@@ -1,269 +1,1523 @@
-### Register Student
+POST http://localhost:5000/api/ideas
+Content-Type: application/json
+
+{
+    "title": "Smart Campus Waste Management",
+    "description": "A system to improve waste collection on campus.",
+    "category": "Environment",
+    "requiredSkills": ["Web Development", "IoT"],
+    "technologyStack": ["React", "Node.js", "MongoDB"],
+    "problemStatement": "Campus waste bins are not monitored efficiently.",
+    "expectedOutcome": "Improve waste collection and reduce overflowing bins."
+}
+
+### Create Student
+
 POST http://localhost:5000/api/students
 Content-Type: application/json
 
 {
-    "first_name": "New",
-    "last_name": "Student",
-    "email": "newstudent@test.com",
-    "password": "student123",
+    "first_name": "Deepak",
+    "last_name": "Raja",
+    "email": "deepak@example.com",
+    "password": "test123",
     "phone": "9876543210",
-    "department": "Information Technology",
+    "department": "Computer Science",
     "year": 3,
-    "skills": ["Java", "JavaScript"],
-    "bio": "Test student",
-    "profile_photo": ""
+    "skills": "Java, JavaScript, Database",
+    "bio": "Computer science student interested in software development.",
+    "profile_photo": "profile.jpg"
+}
+
+### Create Mentor
+
+POST http://localhost:5000/api/mentors
+Content-Type: application/json
+
+{
+    "first_name": "Arun",
+    "last_name": "Kumar",
+    "email": "arun@example.com",
+    "password": "test123",
+    "phone": "9876543210",
+    "expertise": "Software Development",
+    "organization": "ABC Technologies",
+    "designation": "Senior Developer",
+    "experience": 8,
+    "bio": "Experienced software developer and mentor.",
+    "profile_photo": "mentor.jpg"
+}
+
+### Create Collaboration Request
+
+POST http://localhost:5000/api/collaboration-requests
+Content-Type: application/json
+
+{
+    "idea_id": "6a8edbf51987e45269b537e1",
+    "student_id": 1,
+    "request_message": "I am interested in joining this project and can contribute to the web development part."
+}
+
+### Create Team
+
+POST http://localhost:5000/api/teams
+Content-Type: application/json
+
+{
+    "idea_id": "6a8edbf51987e45269b537e1",
+    "team_name": "Smart Campus Team",
+    "team_description": "Team working on the Smart Campus Waste Management idea."
+}
+
+### Add Team Member
+
+POST http://localhost:5000/api/team-members
+Content-Type: application/json
+
+{
+    "team_id": 1,
+    "student_id": 1,
+    "role": "Web Developer"
+}
+
+### Create Progress
+
+POST http://localhost:5000/api/progress
+Content-Type: application/json
+
+{
+    "team_id": 1,
+    "milestone": "Backend Development",
+    "completion_percentage": 40,
+    "status": "In Progress"
+}
+
+### Create Feedback
+
+POST http://localhost:5000/api/feedback
+Content-Type: application/json
+
+{
+    "mentor_id": 1,
+    "team_id": 1,
+    "comments": "The team is making good progress.",
+    "suggestions": "Improve the database integration and testing.",
+    "rating": 4
+}
+
+### Create Notification
+
+POST http://localhost:5000/api/notifications
+Content-Type: application/json
+
+{
+    "student_id": 1,
+    "mentor_id": 1,
+    "title": "Feedback Received",
+    "message": "Your mentor has provided feedback on your team progress.",
+    "notification_type": "Feedback"
+}
+
+### Create Privacy Settings
+
+POST http://localhost:5000/api/privacy-settings
+Content-Type: application/json
+
+{
+    "idea_id": "6a8edbf51987e45269b537e1",
+    "visibility": "Public",
+    "collaboration_allowed": true,
+    "allow_feedback": true
+}
+
+### Get All Students
+
+GET http://localhost:5000/api/students
+
+### Get All Ideas
+
+GET http://localhost:5000/api/ideas
+
+### Get All Mentors
+
+GET http://localhost:5000/api/mentors
+
+### Get All Collaboration Requests
+
+GET http://localhost:5000/api/collaboration-requests
+
+### Get All Teams
+
+GET http://localhost:5000/api/teams
+
+### Get All Team Members
+
+GET http://localhost:5000/api/team-members
+
+### Get All Progress
+
+GET http://localhost:5000/api/progress
+
+### Get All Feedback
+
+GET http://localhost:5000/api/feedback
+
+### Get All Notifications
+
+GET http://localhost:5000/api/notifications
+
+### Get All Privacy Settings
+
+GET http://localhost:5000/api/privacy-settings
+
+### Register New Student
+
+POST http://localhost:5000/api/students
+Content-Type: application/json
+
+{
+    "first_name": "Test",
+    "last_name": "Student",
+    "email": "newstudent@example.com",
+    "password": "test123",
+    "phone": "9999999999",
+    "department": "Computer Science",
+    "year": 3,
+    "skills": "Java, JavaScript",
+    "bio": "Student testing registration.",
+    "profile_photo": "profile.jpg"
 }
 
 ### Student Login
+
 POST http://localhost:5000/api/login
 Content-Type: application/json
 
 {
-    "email": "newstudent@test.com",
-    "password": "student123"
+    "email": "newstudent@example.com",
+    "password": "test123"
 }
 
 ### Student Login - Wrong Password
+
 POST http://localhost:5000/api/login
 Content-Type: application/json
 
 {
-    "email": "newstudent@test.com",
+    "email": "newstudent@example.com",
     "password": "wrongpassword"
 }
 
-### Register Mentor
+### Student Login
+
+POST http://localhost:5000/api/login
+Content-Type: application/json
+
+{
+    "email": "newstudent@example.com",
+    "password": "test123"
+}
+
+### Get Students - No Token
+
+GET http://localhost:5000/api/students
+
+### Get Students - With Token
+
+GET http://localhost:5000/api/students
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdHVkZW50X2lkIjoyLCJlbWFpbCI6Im5ld3N0dWRlbnRAZXhhbXBsZS5jb20iLCJyb2xlIjoic3R1ZGVudCIsImlhdCI6MTc4NzkwMzQyNiwiZXhwIjoxNzg3OTA3MDI2fQ.vXolMrpl7enf-O_7Pta_jT1VkhnpBceaAfTPOV-VZIA
+### Create New Mentor
+
 POST http://localhost:5000/api/mentors
 Content-Type: application/json
 
 {
     "first_name": "Test",
     "last_name": "Mentor",
-    "email": "testmentor@test.com",
-    "password": "mentor123",
-    "phone": "9876543210",
-    "expertise": ["Artificial Intelligence", "Web Development"],
-    "organization": "InnoBridge",
-    "designation": "Technical Mentor",
-    "experience": 5,
-    "bio": "Test mentor",
-    "profile_photo": ""
+    "email": "newmentor@example.com",
+    "password": "test123",
+    "phone": "9999999999",
+    "expertise": "Software Development",
+    "organization": "ABC Technologies",
+    "designation": "Senior Developer",
+    "experience": 8,
+    "bio": "Experienced software developer and mentor.",
+    "profile_photo": "mentor.jpg"
 }
 
 ### Mentor Login
+
 POST http://localhost:5000/api/mentor-login
 Content-Type: application/json
 
 {
-    "email": "testmentor@test.com",
-    "password": "mentor123"
+    "email": "newmentor@example.com",
+    "password": "test123"
 }
 
 ### Mentor Login - Wrong Password
+
 POST http://localhost:5000/api/mentor-login
 Content-Type: application/json
 
 {
-    "email": "testmentor@test.com",
+    "email": "newmentor@example.com",
     "password": "wrongpassword"
 }
 
-### Authentication Test
-GET http://localhost:5000/api/auth-test
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdHVkZW50X2lkIjo0LCJlbWFpbCI6Im5ld3N0dWRlbnRAdGVzdC5jb20iLCJyb2xlIjoic3R1ZGVudCIsImlhdCI6MTc5MDI2OTgzOCwiZXhwIjoxNzkwMjczNDM4fQ.kOLR2Tpi32n7j33oZMy9U9zjhRbbugR5GZL76QCjAEY
+### Get all mentors with JWT
 
-### Authentication Test - No Token
-GET http://localhost:5000/api/auth-test
+GET http://localhost:5000/api/mentors
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJtZW50b3JfaWQiOjIsImVtYWlsIjoibmV3bWVudG9yQGV4YW1wbGUuY29tIiwicm9sZSI6Im1lbnRvciIsImlhdCI6MTc4Nzg0NDk2NSwiZXhwIjoxNzg3ODQ4NTY1fQ.gV76q63_cU1SRzLO6beUjYRp-tNTY9cOj6oprNvzr2Q
 
-### Create Idea
-POST http://localhost:5000/api/ideas
+### Create Collaboration Request
+
+POST http://localhost:5000/api/collaboration-requests
+Authorization: Bearer YOUR_STUDENT_TOKEN
 Content-Type: application/json
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdHVkZW50X2lkIjo0LCJlbWFpbCI6Im5ld3N0dWRlbnRAdGVzdC5jb20iLCJyb2xlIjoic3R1ZGVudCIsImlhdCI6MTc5MDI2OTgzOCwiZXhwIjoxNzkwMjczNDM4fQ.kOLR2Tpi32n7j33oZMy9U9zjhRbbugR5GZL76QCjAEY
-
 
 {
-    "title": "Smart Campus Assistant",
-    "description": "An application to help students manage campus activities",
-    "category": "Education",
-    "requiredSkills": ["Java", "Python"],
-    "technologyStack": ["Node.js", "MongoDB"],
-    "problemStatement": "Students find it difficult to manage campus information",
-    "expectedOutcome": "A centralized platform for campus information",
-    "status": "open"
+    "idea_id": "6a8edbf51987e45269b537e1",
+    "student_id": 2,
+    "request_message": "I am interested in joining this project."
 }
 
-### Get All Public Ideas
-GET http://localhost:5000/api/ideas
+### Create Collaboration Request
 
-### Create Team
+POST http://localhost:5000/api/collaboration-requests
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdHVkZW50X2lkIjoyLCJlbWFpbCI6Im5ld3N0dWRlbnRAZXhhbXBsZS5jb20iLCJyb2xlIjoic3R1ZGVudCIsImlhdCI6MTc4Nzg0NTczOCwiZXhwIjoxNzg3ODQ5MzM4fQ.mBqvUZRy_1HHjJy1zHkS3TIUNYBd1M5bfuIPr-NwZys
+
+Content-Type: application/json
+
+{
+    "idea_id": "6a8edbf51987e45269b537e1",
+    "student_id": 1,
+    "request_message": "I am interested in joining this project and can contribute to the web development part."
+}
+
+### Get Collaboration Requests - No Token
+
+GET http://localhost:5000/api/collaboration-requests
+
+### Get Collaboration Requests - With Token
+
+GET http://localhost:5000/api/collaboration-requests
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdHVkZW50X2lkIjoyLCJlbWFpbCI6Im5ld3N0dWRlbnRAZXhhbXBsZS5jb20iLCJyb2xlIjoic3R1ZGVudCIsImlhdCI6MTc4Nzg0NTczOCwiZXhwIjoxNzg3ODQ5MzM4fQ.mBqvUZRy_1HHjJy1zHkS3TIUNYBd1M5bfuIPr-NwZys
+
+### Create Team - No Token
+
 POST http://localhost:5000/api/teams
 Content-Type: application/json
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdHVkZW50X2lkIjo0LCJlbWFpbCI6Im5ld3N0dWRlbnRAdGVzdC5jb20iLCJyb2xlIjoic3R1ZGVudCIsImlhdCI6MTc5MDI3MzQ3NywiZXhwIjoxNzkwMjc3MDc3fQ.kJ7xDG_9JwwBzfrpdiMw6f2FpHBJM63Ho9ER-OqJlZU
 
 {
-    "idea_id": "PASTE_MONGODB_OBJECT_ID_HERE",
-    "team_name": "Smart Campus Team",
-    "team_description": "Team working on the Smart Campus Assistant idea"
+    "idea_id": "6a8edbf51987e45269b537e1",
+    "team_name": "Test Team",
+    "team_description": "Team for testing authentication."
 }
 
-### Create Team
+### Create Team - With Token
+
+### Create Team - With Token
+
 POST http://localhost:5000/api/teams
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdHVkZW50X2lkIjoyLCJlbWFpbCI6Im5ld3N0dWRlbnRAZXhhbXBsZS5jb20iLCJyb2xlIjoic3R1ZGVudCIsImlhdCI6MTc4Nzg0NTczOCwiZXhwIjoxNzg3ODQ5MzM4fQ.mBqvUZRy_1HHjJy1zHkS3TIUNYBd1M5bfuIPr-NwZys
+
 Content-Type: application/json
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdHVkZW50X2lkIjo0LCJlbWFpbCI6Im5ld3N0dWRlbnRAdGVzdC5jb20iLCJyb2xlIjoic3R1ZGVudCIsImlhdCI6MTc5MDI3MzQ3NywiZXhwIjoxNzkwMjc3MDc3fQ.kJ7xDG_9JwwBzfrpdiMw6f2FpHBJM63Ho9ER-OqJlZU
 
 {
-    "idea_id": "6ab55a2b780cc5fcd1b540d5",
-    "team_name": "Smart Campus Team",
-    "team_description": "Team working on the Smart Campus Assistant idea"
+    "idea_id": "6a8edbf51987e45269b537e1",
+    "team_name": "Test Team",
+    "team_description": "Team for testing authentication."
 }
 
-### Add Student to Team
+### Get Teams - No Token
+
+GET http://localhost:5000/api/teams
+
+### Get Teams - With Token
+
+GET http://localhost:5000/api/teams
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdHVkZW50X2lkIjoyLCJlbWFpbCI6Im5ld3N0dWRlbnRAZXhhbXBsZS5jb20iLCJyb2xlIjoic3R1ZGVudCIsImlhdCI6MTc4Nzg0NTczOCwiZXhwIjoxNzg3ODQ5MzM4fQ.mBqvUZRy_1HHjJy1zHkS3TIUNYBd1M5bfuIPr-NwZys
+
+### Add Team Member - No Token
+
 POST http://localhost:5000/api/team-members
 Content-Type: application/json
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdHVkZW50X2lkIjo0LCJlbWFpbCI6Im5ld3N0dWRlbnRAdGVzdC5jb20iLCJyb2xlIjoic3R1ZGVudCIsImlhdCI6MTc5MDI3MzQ3NywiZXhwIjoxNzkwMjc3MDc3fQ.kJ7xDG_9JwwBzfrpdiMw6f2FpHBJM63Ho9ER-OqJlZU
-
 
 {
-    "team_id": 7,
+    "team_id": 2,
+    "student_id": 2,
+    "role": "Developer"
+}
+
+### Add Team Member - With Token
+
+POST http://localhost:5000/api/team-members
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdHVkZW50X2lkIjoyLCJlbWFpbCI6Im5ld3N0dWRlbnRAZXhhbXBsZS5jb20iLCJyb2xlIjoic3R1ZGVudCIsImlhdCI6MTc4Nzg0NTczOCwiZXhwIjoxNzg3ODQ5MzM4fQ.mBqvUZRy_1HHjJy1zHkS3TIUNYBd1M5bfuIPr-NwZys
+Content-Type: application/json
+
+{
+    "team_id": 2,
+    "student_id": 2,
+    "role": "Developer"
+}
+
+### Get Team Members - No Token
+
+GET http://localhost:5000/api/team-members
+
+### Get Team Members - With Token
+
+GET http://localhost:5000/api/team-members
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdHVkZW50X2lkIjoyLCJlbWFpbCI6Im5ld3N0dWRlbnRAZXhhbXBsZS5jb20iLCJyb2xlIjoic3R1ZGVudCIsImlhdCI6MTc4Nzg0NTczOCwiZXhwIjoxNzg3ODQ5MzM4fQ.mBqvUZRy_1HHjJy1zHkS3TIUNYBd1M5bfuIPr-NwZys
+
+### Create Progress - No Token
+
+POST http://localhost:5000/api/progress
+Content-Type: application/json
+
+{
+    "team_id": 2,
+    "milestone": "Backend Development",
+    "completion_percentage": 50,
+    "status": "In Progress"
+}
+
+### Create Progress - With Token
+
+POST http://localhost:5000/api/progress
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdHVkZW50X2lkIjoyLCJlbWFpbCI6Im5ld3N0dWRlbnRAZXhhbXBsZS5jb20iLCJyb2xlIjoic3R1ZGVudCIsImlhdCI6MTc4Nzg0NTczOCwiZXhwIjoxNzg3ODQ5MzM4fQ.mBqvUZRy_1HHjJy1zHkS3TIUNYBd1M5bfuIPr-NwZys
+Content-Type: application/json
+
+{
+    "team_id": 2,
+    "milestone": "Backend Development",
+    "completion_percentage": 50,
+    "status": "In Progress"
+}
+
+### Get Progress - No Token
+
+GET http://localhost:5000/api/progress
+
+### Get Progress - With Token
+
+GET http://localhost:5000/api/progress
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdHVkZW50X2lkIjoyLCJlbWFpbCI6Im5ld3N0dWRlbnRAZXhhbXBsZS5jb20iLCJyb2xlIjoic3R1ZGVudCIsImlhdCI6MTc4Nzg0NTczOCwiZXhwIjoxNzg3ODQ5MzM4fQ.mBqvUZRy_1HHjJy1zHkS3TIUNYBd1M5bfuIPr-NwZys
+
+### Create Feedback - No Token
+
+POST http://localhost:5000/api/feedback
+Content-Type: application/json
+
+{
+    "team_id": 2,
+    "mentor_id": 2,
+    "feedback_text": "Good progress on the project."
+}
+
+### Create Feedback - With Mentor Token
+
+POST http://localhost:5000/api/feedback
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJtZW50b3JfaWQiOjIsImVtYWlsIjoibmV3bWVudG9yQGV4YW1wbGUuY29tIiwicm9sZSI6Im1lbnRvciIsImlhdCI6MTc4ODYyMTc1NCwiZXhwIjoxNzg4NjI1MzU0fQ.B9VbUTPbrx8Q9SoysU6OrsSaxN-XY132vBbiW5uB_PY
+
+Content-Type: application/json
+
+{
+    "team_id": 2,
+    "mentor_id": 2,
+    "feedback_text": "Good progress on the project."
+}
+
+### Create Feedback - With Mentor Token
+
+POST http://localhost:5000/api/feedback
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJtZW50b3JfaWQiOjIsImVtYWlsIjoibmV3bWVudG9yQGV4YW1wbGUuY29tIiwicm9sZSI6Im1lbnRvciIsImlhdCI6MTc4ODYyMTc1NCwiZXhwIjoxNzg4NjI1MzU0fQ.B9VbUTPbrx8Q9SoysU6OrsSaxN-XY132vBbiW5uB_PY
+Content-Type: application/json
+
+{
+    "mentor_id": 2,
+    "team_id": 2,
+    "feedback_text": "Good progress on the project."
+}
+
+### Get Feedback - No Token
+
+GET http://localhost:5000/api/feedback
+
+### Get Feedback - With Token
+
+GET http://localhost:5000/api/feedback
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJtZW50b3JfaWQiOjIsImVtYWlsIjoibmV3bWVudG9yQGV4YW1wbGUuY29tIiwicm9sZSI6Im1lbnRvciIsImlhdCI6MTc4Nzg0NDk2NSwiZXhwIjoxNzg3ODQ4NTY1fQ.gV76q63_cU1SRzLO6beUjYRp-tNTY9cOj6oprNvzr2Q
+
+### Create Notification - No Token
+
+POST http://localhost:5000/api/notifications
+Content-Type: application/json
+
+{
+    "student_id": 2,
+    "mentor_id": 2,
+    "title": "Test Notification",
+    "message": "This is a test notification.",
+    "notification_type": "Feedback"
+}
+
+### Create Notification - With Token
+
+POST http://localhost:5000/api/notifications
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdHVkZW50X2lkIjoyLCJlbWFpbCI6Im5ld3N0dWRlbnRAZXhhbXBsZS5jb20iLCJyb2xlIjoic3R1ZGVudCIsImlhdCI6MTc4Nzg0NTczOCwiZXhwIjoxNzg3ODQ5MzM4fQ.mBqvUZRy_1HHjJy1zHkS3TIUNYBd1M5bfuIPr-NwZys
+Content-Type: application/json
+
+{
+    "student_id": 2,
+    "mentor_id": 2,
+    "title": "Test Notification",
+    "message": "This is a test notification.",
+    "notification_type": "Feedback"
+}
+
+### Get Notifications - No Token
+
+GET http://localhost:5000/api/notifications
+
+### Get Notifications - With Token
+
+GET http://localhost:5000/api/notifications
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdHVkZW50X2lkIjoyLCJlbWFpbCI6Im5ld3N0dWRlbnRAZXhhbXBsZS5jb20iLCJyb2xlIjoic3R1ZGVudCIsImlhdCI6MTc4Nzg0NTczOCwiZXhwIjoxNzg3ODQ5MzM4fQ.mBqvUZRy_1HHjJy1zHkS3TIUNYBd1M5bfuIPr-NwZys
+
+### Create Privacy Settings - No Token
+
+POST http://localhost:5000/api/privacy-settings
+Content-Type: application/json
+
+{
+    "idea_id": "6a8edbf51987e45269b537e1",
+    "visibility": "Public",
+    "collaboration_allowed": true,
+    "allow_feedback": true
+}
+
+### Create Privacy Settings - With Token
+
+POST http://localhost:5000/api/privacy-settings
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdHVkZW50X2lkIjoyLCJlbWFpbCI6Im5ld3N0dWRlbnRAZXhhbXBsZS5jb20iLCJyb2xlIjoic3R1ZGVudCIsImlhdCI6MTc4Nzg0NTczOCwiZXhwIjoxNzg3ODQ5MzM4fQ.mBqvUZRy_1HHjJy1zHkS3TIUNYBd1M5bfuIPr-NwZys
+Content-Type: application/json
+
+{
+    "idea_id": "6a8edbf51987e45269b537e1",
+    "visibility": "Public",
+    "collaboration_allowed": true,
+    "allow_feedback": true
+}
+
+### Get Privacy Settings - No Token
+
+GET http://localhost:5000/api/privacy-settings
+
+### Get Privacy Settings - With Token
+
+GET http://localhost:5000/api/privacy-settings
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdHVkZW50X2lkIjoyLCJlbWFpbCI6Im5ld3N0dWRlbnRAZXhhbXBsZS5jb20iLCJyb2xlIjoic3R1ZGVudCIsImlhdCI6MTc4Nzg0NTczOCwiZXhwIjoxNzg3ODQ5MzM4fQ.mBqvUZRy_1HHjJy1zHkS3TIUNYBd1M5bfuIPr-NwZys
+
+### Feedback - Student Token Test
+
+POST http://localhost:5000/api/feedback
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdHVkZW50X2lkIjoyLCJlbWFpbCI6Im5ld3N0dWRlbnRAZXhhbXBsZS5jb20iLCJyb2xlIjoic3R1ZGVudCIsImlhdCI6MTc4Nzg0NTczOCwiZXhwIjoxNzg3ODQ5MzM4fQ.mBqvUZRy_1HHjJy1zHkS3TIUNYBd1M5bfuIPr-NwZys
+Content-Type: application/json
+
+{
+    "mentor_id": 2,
+    "team_id": 2,
+    "feedback_text": "Testing role authorization."
+}
+
+### Feedback - Mentor Token Test
+
+POST http://localhost:5000/api/feedback
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJtZW50b3JfaWQiOjIsImVtYWlsIjoibmV3bWVudG9yQGV4YW1wbGUuY29tIiwicm9sZSI6Im1lbnRvciIsImlhdCI6MTc4Nzg0ODgyOCwiZXhwIjoxNzg3ODUyNDI4fQ.7q1V7cozBSUXlWd1z7zSB-Scv62w7bgxHoWIOjR54AM
+
+Content-Type: application/json
+
+{
+    "mentor_id": 2,
+    "team_id": 2,
+    "feedback_text": "Testing mentor authorization."
+}
+
+### Create Collaboration Request - Mentor Token Test
+
+POST http://localhost:5000/api/collaboration-requests
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJtZW50b3JfaWQiOjIsImVtYWlsIjoibmV3bWVudG9yQGV4YW1wbGUuY29tIiwicm9sZSI6Im1lbnRvciIsImlhdCI6MTc4Nzg0ODgyOCwiZXhwIjoxNzg3ODUyNDI4fQ.7q1V7cozBSUXlWd1z7zSB-Scv62w7bgxHoWIOjR54AM
+Content-Type: application/json
+
+{
+    "idea_id": "6a8edbf51987e45269b537e1",
+    "student_id": 1,
+    "request_message": "Testing role authorization."
+}
+
+### Create Collaboration Request - Student Token Test
+
+POST http://localhost:5000/api/collaboration-requests
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdHVkZW50X2lkIjoyLCJlbWFpbCI6Im5ld3N0dWRlbnRAZXhhbXBsZS5jb20iLCJyb2xlIjoic3R1ZGVudCIsImlhdCI6MTc4Nzg0OTgyOSwiZXhwIjoxNzg3ODUzNDI5fQ.7lIjPAa0l6BAam-hPXIAIr3T0QIqty4FJMipODUl_NQ
+
+Content-Type: application/json
+
+{
+    "idea_id": "6a8edbf51987e45269b537e1",
+    "student_id": 2,
+    "request_message": "Testing student authorization."
+}
+
+### Create Team - Mentor Token Test
+
+POST http://localhost:5000/api/teams
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJtZW50b3JfaWQiOjIsImVtYWlsIjoibmV3bWVudG9yQGV4YW1wbGUuY29tIiwicm9sZSI6Im1lbnRvciIsImlhdCI6MTc4Nzg0ODgyOCwiZXhwIjoxNzg3ODUyNDI4fQ.7q1V7cozBSUXlWd1z7zSB-Scv62w7bgxHoWIOjR54AM
+Content-Type: application/json
+
+{
+    "idea_id": "6a8edbf51987e45269b537e1",
+    "team_name": "Mentor Test Team",
+    "team_description": "Testing team role authorization."
+}
+
+### Create Team - Student Token Test
+
+POST http://localhost:5000/api/teams
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdHVkZW50X2lkIjoyLCJlbWFpbCI6Im5ld3N0dWRlbnRAZXhhbXBsZS5jb20iLCJyb2xlIjoic3R1ZGVudCIsImlhdCI6MTc4Nzg0OTgyOSwiZXhwIjoxNzg3ODUzNDI5fQ.7lIjPAa0l6BAam-hPXIAIr3T0QIqty4FJMipODUl_NQ
+Content-Type: application/json
+
+{
+    "idea_id": "6a8edbf51987e45269b537e1",
+    "team_name": "Student Test Team",
+    "team_description": "Testing student team authorization."
+}
+
+### Add Team Member - Mentor Token Test
+
+POST http://localhost:5000/api/team-members
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJtZW50b3JfaWQiOjIsImVtYWlsIjoibmV3bWVudG9yQGV4YW1wbGUuY29tIiwicm9sZSI6Im1lbnRvciIsImlhdCI6MTc4Nzg0ODgyOCwiZXhwIjoxNzg3ODUyNDI4fQ.7q1V7cozBSUXlWd1z7zSB-Scv62w7bgxHoWIOjR54AM
+Content-Type: application/json
+
+{
+    "team_id": 2,
+    "student_id": 1,
+    "role": "Developer"
+}
+
+### Add Team Member - Student Token Test
+
+POST http://localhost:5000/api/team-members
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdHVkZW50X2lkIjoyLCJlbWFpbCI6Im5ld3N0dWRlbnRAZXhhbXBsZS5jb20iLCJyb2xlIjoic3R1ZGVudCIsImlhdCI6MTc4Nzg0OTgyOSwiZXhwIjoxNzg3ODUzNDI5fQ.7lIjPAa0l6BAam-hPXIAIr3T0QIqty4FJMipODUl_NQ
+Content-Type: application/json
+
+{
+    "team_id": 2,
+    "student_id": 1,
+    "role": "Developer"
+}
+
+### Create Privacy Settings - Mentor Token Test
+
+POST http://localhost:5000/api/privacy-settings
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJtZW50b3JfaWQiOjIsImVtYWlsIjoibmV3bWVudG9yQGV4YW1wbGUuY29tIiwicm9sZSI6Im1lbnRvciIsImlhdCI6MTc4Nzg0ODgyOCwiZXhwIjoxNzg3ODUyNDI4fQ.7q1V7cozBSUXlWd1z7zSB-Scv62w7bgxHoWIOjR54AM
+Content-Type: application/json
+
+{
+    "idea_id": "6a8edbf51987e45269b537e1",
+    "visibility": "Public",
+    "collaboration_allowed": true,
+    "allow_feedback": true
+}
+
+### Create Privacy Settings - Student Token Test
+
+POST http://localhost:5000/api/privacy-settings
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdHVkZW50X2lkIjoyLCJlbWFpbCI6Im5ld3N0dWRlbnRAZXhhbXBsZS5jb20iLCJyb2xlIjoic3R1ZGVudCIsImlhdCI6MTc4Nzg0OTgyOSwiZXhwIjoxNzg3ODUzNDI5fQ.7lIjPAa0l6BAam-hPXIAIr3T0QIqty4FJMipODUl_NQ
+Content-Type: application/json
+
+{
+    "idea_id": "6a8edbf51987e45269b537e1",
+    "visibility": "Public",
+    "collaboration_allowed": true,
+    "allow_feedback": true
+}
+
+### Create Idea - Mentor Token Test
+
+POST http://localhost:5000/api/ideas
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJtZW50b3JfaWQiOjIsImVtYWlsIjoibmV3bWVudG9yQGV4YW1wbGUuY29tIiwicm9sZSI6Im1lbnRvciIsImlhdCI6MTc4Nzg0ODgyOCwiZXhwIjoxNzg3ODUyNDI4fQ.7q1V7cozBSUXlWd1z7zSB-Scv62w7bgxHoWIOjR54AM
+Content-Type: application/json
+
+{
+    "title": "Mentor Test Idea",
+    "description": "Testing idea authorization.",
+    "category": "Technology",
+    "requiredSkills": ["Java"],
+    "technologyStack": ["Node.js"],
+    "problemStatement": "Testing",
+    "expectedOutcome": "Testing"
+}
+
+### Create Idea - Mentor Token Test
+
+POST http://localhost:5000/api/ideas
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJtZW50b3JfaWQiOjIsImVtYWlsIjoibmV3bWVudG9yQGV4YW1wbGUuY29tIiwicm9sZSI6Im1lbnRvciIsImlhdCI6MTc4Nzg0ODgyOCwiZXhwIjoxNzg3ODUyNDI4fQ.7q1V7cozBSUXlWd1z7zSB-Scv62w7bgxHoWIOjR54AM
+Content-Type: application/json
+
+{
+    "title": "Mentor Test Idea",
+    "description": "Testing idea authorization.",
+    "category": "Technology",
+    "requiredSkills": ["Java"],
+    "technologyStack": ["Node.js"],
+    "problemStatement": "Testing",
+    "expectedOutcome": "Testing"
+}
+
+### Create Idea - Student Token Test
+
+POST http://localhost:5000/api/ideas
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdHVkZW50X2lkIjoyLCJlbWFpbCI6Im5ld3N0dWRlbnRAZXhhbXBsZS5jb20iLCJyb2xlIjoic3R1ZGVudCIsImlhdCI6MTc4Nzg0OTgyOSwiZXhwIjoxNzg3ODUzNDI5fQ.7lIjPAa0l6BAam-hPXIAIr3T0QIqty4FJMipODUl_NQ
+Content-Type: application/json
+
+{
+    "title": "Student Test Idea",
+    "description": "Testing student idea creation.",
+    "category": "Technology",
+    "requiredSkills": ["Java"],
+    "technologyStack": ["Node.js"],
+    "problemStatement": "Testing student ownership.",
+    "expectedOutcome": "Verify student_id is stored."
+}
+
+### Get Collaboration Requests - Student
+
+GET http://localhost:5000/api/collaboration-requests
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdHVkZW50X2lkIjoyLCJlbWFpbCI6Im5ld3N0dWRlbnRAZXhhbXBsZS5jb20iLCJyb2xlIjoic3R1ZGVudCIsImlhdCI6MTc4Nzg0OTgyOSwiZXhwIjoxNzg3ODUzNDI5fQ.7lIjPAa0l6BAam-hPXIAIr3T0QIqty4FJMipODUl_NQ
+
+### Create Collaboration Request - Student 2
+
+POST http://localhost:5000/api/collaboration-requests
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdHVkZW50X2lkIjoyLCJlbWFpbCI6Im5ld3N0dWRlbnRAZXhhbXBsZS5jb20iLCJyb2xlIjoic3R1ZGVudCIsImlhdCI6MTc4Nzg0OTgyOSwiZXhwIjoxNzg3ODUzNDI5fQ.7lIjPAa0l6BAam-hPXIAIr3T0QIqty4FJMipODUl_NQ
+Content-Type: application/json
+
+{
+    "idea_id": "6a9071587a589410c55d9de8",
+    "student_id": 2,
+    "request_message": "Testing collaboration request filtering."
+}
+
+### Get Collaboration Requests - Student 2
+
+GET http://localhost:5000/api/collaboration-requests
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdHVkZW50X2lkIjoyLCJlbWFpbCI6Im5ld3N0dWRlbnRAZXhhbXBsZS5jb20iLCJyb2xlIjoic3R1ZGVudCIsImlhdCI6MTc4Nzg0OTgyOSwiZXhwIjoxNzg3ODUzNDI5fQ.7lIjPAa0l6BAam-hPXIAIr3T0QIqty4FJMipODUl_NQ
+
+### Mentor - View Guidance Requests
+GET http://localhost:5000/api/mentor/guidance-requests
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJtZW50b3JfaWQiOjIsImVtYWlsIjoibmV3bWVudG9yQGV4YW1wbGUuY29tIiwicm9sZSI6Im1lbnRvciIsImlhdCI6MTc4ODYyMTY3OCwiZXhwIjoxNzg4NjI1Mjc4fQ.ZcgrcEfiiz8f9TdWWBk0SBnuqZSLFE15xruAMMV_w6s
+
+### Student - Send Guidance Request
+POST http://localhost:5000/api/collaboration-requests
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdHVkZW50X2lkIjoyLCJlbWFpbCI6Im5ld3N0dWRlbnRAZXhhbXBsZS5jb20iLCJyb2xlIjoic3R1ZGVudCIsImlhdCI6MTc4ODYyMTc4NiwiZXhwIjoxNzg4NjI1Mzg2fQ.cUirvWRTv1-WVsiEEo-7_Nn9rt3v77fhvJ45matWlNU
+Content-Type: application/json
+
+{
+    "idea_id": "6a9071587a589410c55d9de8",
+    "mentor_id": 2,
+    "request_message": "I would like guidance for this project."
+
+}
+
+### Mentor - View Guidance Requests
+GET http://localhost:5000/api/mentor/guidance-requests
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJtZW50b3JfaWQiOjIsImVtYWlsIjoibmV3bWVudG9yQGV4YW1wbGUuY29tIiwicm9sZSI6Im1lbnRvciIsImlhdCI6MTc4ODYyMTY3OCwiZXhwIjoxNzg4NjI1Mjc4fQ.ZcgrcEfiiz8f9TdWWBk0SBnuqZSLFE15xruAMMV_w6s
+
+### Mentor - Accept Guidance Request
+POST http://localhost:5000/api/mentor/guidance-requests/5/accept
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJtZW50b3JfaWQiOjIsImVtYWlsIjoibmV3bWVudG9yQGV4YW1wbGUuY29tIiwicm9sZSI6Im1lbnRvciIsImlhdCI6MTc4ODYyMTY3OCwiZXhwIjoxNzg4NjI1Mjc4fQ.ZcgrcEfiiz8f9TdWWBk0SBnuqZSLFE15xruAMMV_w6s
+
+### Mentor - Check Guidance Requests
+GET http://localhost:5000/api/mentor/guidance-requests
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJtZW50b3JfaWQiOjIsImVtYWlsIjoibmV3bWVudG9yQGV4YW1wbGUuY29tIiwicm9sZSI6Im1lbnRvciIsImlhdCI6MTc4ODYyMTY3OCwiZXhwIjoxNzg4NjI1Mjc4fQ.ZcgrcEfiiz8f9TdWWBk0SBnuqZSLFE15xruAMMV_w6s
+
+### Student - Send Another Guidance Request
+POST http://localhost:5000/api/collaboration-requests
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdHVkZW50X2lkIjoyLCJlbWFpbCI6Im5ld3N0dWRlbnRAZXhhbXBsZS5jb20iLCJyb2xlIjoic3R1ZGVudCIsImlhdCI6MTc4ODYyMTc4NiwiZXhwIjoxNzg4NjI1Mzg2fQ.cUirvWRTv1-WVsiEEo-7_Nn9rt3v77fhvJ45matWlNU
+Content-Type: application/json
+
+{
+    "idea_id": "6a9071587a589410c55d9de8",
+    "mentor_id": 2,
+    "request_message": "Testing the guidance rejection flow."
+}
+
+### Mentor - Reject Guidance Request
+POST http://localhost:5000/api/mentor/guidance-requests/6/reject
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJtZW50b3JfaWQiOjIsImVtYWlsIjoibmV3bWVudG9yQGV4YW1wbGUuY29tIiwicm9sZSI6Im1lbnRvciIsImlhdCI6MTc4ODYyMTY3OCwiZXhwIjoxNzg4NjI1Mjc4fQ.ZcgrcEfiiz8f9TdWWBk0SBnuqZSLFE15xruAMMV_w6s
+
+### Student - Create Request for Notification Test
+POST http://localhost:5000/api/collaboration-requests
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdHVkZW50X2lkIjoyLCJlbWFpbCI6Im5ld3N0dWRlbnRAZXhhbXBsZS5jb20iLCJyb2xlIjoic3R1ZGVudCIsImlhdCI6MTc4ODYyMTc4NiwiZXhwIjoxNzg4NjI1Mzg2fQ.cUirvWRTv1-WVsiEEo-7_Nn9rt3v77fhvJ45matWlNU
+Content-Type: application/json
+
+{
+    "idea_id": "6a9071587a589410c55d9de8",
+    "mentor_id": 2,
+    "request_message": "Testing notification after mentor acceptance."
+}
+
+### Mentor - Accept Request 7
+POST http://localhost:5000/api/mentor/guidance-requests/7/accept
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJtZW50b3JfaWQiOjIsImVtYWlsIjoibmV3bWVudG9yQGV4YW1wbGUuY29tIiwicm9sZSI6Im1lbnRvciIsImlhdCI6MTc4ODYyMTY3OCwiZXhwIjoxNzg4NjI1Mjc4fQ.ZcgrcEfiiz8f9TdWWBk0SBnuqZSLFE15xruAMMV_w6s
+
+### Student - Check Notifications
+GET http://localhost:5000/api/notifications
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdHVkZW50X2lkIjoyLCJlbWFpbCI6Im5ld3N0dWRlbnRAZXhhbXBsZS5jb20iLCJyb2xlIjoic3R1ZGVudCIsImlhdCI6MTc4ODYyMTc4NiwiZXhwIjoxNzg4NjI1Mzg2fQ.cUirvWRTv1-WVsiEEo-7_Nn9rt3v77fhvJ45matWlNU
+
+### Student - Check Notifications
+GET http://localhost:5000/api/notifications
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdHVkZW50X2lkIjoyLCJlbWFpbCI6Im5ld3N0dWRlbnRAZXhhbXBsZS5jb20iLCJyb2xlIjoic3R1ZGVudCIsImlhdCI6MTc4ODYyMTc4NiwiZXhwIjoxNzg4NjI1Mzg2fQ.cUirvWRTv1-WVsiEEo-7_Nn9rt3v77fhvJ45matWlNU
+
+### Get Feedback
+GET http://localhost:5000/api/feedback
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJtZW50b3JfaWQiOjIsImVtYWlsIjoibmV3bWVudG9yQGV4YW1wbGUuY29tIiwicm9sZSI6Im1lbnRvciIsImlhdCI6MTc4ODYyMTc1NCwiZXhwIjoxNzg4NjI1MzU0fQ.B9VbUTPbrx8Q9SoysU6OrsSaxN-XY132vBbiW5uB_PY
+
+### Get Feedback
+GET http://localhost:5000/api/feedback
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJtZW50b3JfaWQiOjIsImVtYWlsIjoibmV3bWVudG9yQGV4YW1wbGUuY29tIiwicm9sZSI6Im1lbnRvciIsImlhdCI6MTc4ODYyMTc1NCwiZXhwIjoxNzg4NjI1MzU0fQ.B9VbUTPbrx8Q9SoysU6OrsSaxN-XY132vBbiW5uB_PY
+
+### Student - View Team Feedback
+GET http://localhost:5000/api/student/feedback
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdHVkZW50X2lkIjoyLCJlbWFpbCI6Im5ld3N0dWRlbnRAZXhhbXBsZS5jb20iLCJyb2xlIjoic3R1ZGVudCIsImlhdCI6MTc4ODYyMTc4NiwiZXhwIjoxNzg4NjI1Mzg2fQ.cUirvWRTv1-WVsiEEo-7_Nn9rt3v77fhvJ45matWlNU
+
+### Mentor - Create Feedback
+POST http://localhost:5000/api/feedback
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJtZW50b3JfaWQiOjIsImVtYWlsIjoibmV3bWVudG9yQGV4YW1wbGUuY29tIiwicm9sZSI6Im1lbnRvciIsImlhdCI6MTc4ODYyMTc1NCwiZXhwIjoxNzg4NjI1MzU0fQ.B9VbUTPbrx8Q9SoysU6OrsSaxN-XY132vBbiW5uB_PY
+Content-Type: application/json
+
+{
+    "team_id": 2,
+    "comments": "The team is making good progress.",
+    "suggestions": "Improve the database integration and testing.",
+    "rating": 4
+}
+
+### Verify New Feedback
+GET http://localhost:5000/api/student/feedback
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdHVkZW50X2lkIjoyLCJlbWFpbCI6Im5ld3N0dWRlbnRAZXhhbXBsZS5jb20iLCJyb2xlIjoic3R1ZGVudCIsImlhdCI6MTc4ODYyMTc4NiwiZXhwIjoxNzg4NjI1Mzg2fQ.cUirvWRTv1-WVsiEEo-7_Nn9rt3v77fhvJ45matWlNU
+
+### Mentor - Create Feedback With Notification
+POST http://localhost:5000/api/feedback
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJtZW50b3JfaWQiOjIsImVtYWlsIjoibmV3bWVudG9yQGV4YW1wbGUuY29tIiwicm9sZSI6Im1lbnRvciIsImlhdCI6MTc4ODYyMTc1NCwiZXhwIjoxNzg4NjI1MzU0fQ.B9VbUTPbrx8Q9SoysU6OrsSaxN-XY132vBbiW5uB_PY
+Content-Type: application/json
+
+{
+    "team_id": 2,
+    "comments": "Your project implementation is good.",
+    "suggestions": "Improve the API testing and documentation.",
+    "rating": 5
+}
+
+### Student - Check Feedback Notification
+GET http://localhost:5000/api/notifications
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdHVkZW50X2lkIjoyLCJlbWFpbCI6Im5ld3N0dWRlbnRAZXhhbXBsZS5jb20iLCJyb2xlIjoic3R1ZGVudCIsImlhdCI6MTc4ODYyMTc4NiwiZXhwIjoxNzg4NjI1Mzg2fQ.cUirvWRTv1-WVsiEEo-7_Nn9rt3v77fhvJ45matWlNU
+
+### Student - Create Team
+POST http://localhost:5000/api/teams
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdHVkZW50X2lkIjoyLCJlbWFpbCI6Im5ld3N0dWRlbnRAZXhhbXBsZS5jb20iLCJyb2xlIjoic3R1ZGVudCIsImlhdCI6MTc4ODYyMTc4NiwiZXhwIjoxNzg4NjI1Mzg2fQ.cUirvWRTv1-WVsiEEo-7_Nn9rt3v77fhvJ45matWlNU
+Content-Type: application/json
+
+{
+    "idea_id": "6a9071587a589410c55d9de8",
+    "team_name": "Innovation Team",
+    "team_description": "Team working on the submitted innovation idea."
+}
+
+### Student - Add Team Member
+POST http://localhost:5000/api/team-members
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdHVkZW50X2lkIjoyLCJlbWFpbCI6Im5ld3N0dWRlbnRAZXhhbXBsZS5jb20iLCJyb2xlIjoic3R1ZGVudCIsImlhdCI6MTc4ODYyMTc4NiwiZXhwIjoxNzg4NjI1Mzg2fQ.cUirvWRTv1-WVsiEEo-7_Nn9rt3v77fhvJ45matWlNU
+
+Content-Type: application/json
+
+{
+    "team_id": 4,
+    "student_id": 2
+}
+
+### Student - Submit Progress
+POST http://localhost:5000/api/progress
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdHVkZW50X2lkIjoyLCJlbWFpbCI6Im5ld3N0dWRlbnRAZXhhbXBsZS5jb20iLCJyb2xlIjoic3R1ZGVudCIsImlhdCI6MTc4ODYyMTc4NiwiZXhwIjoxNzg4NjI1Mzg2fQ.cUirvWRTv1-WVsiEEo-7_Nn9rt3v77fhvJ45matWlNU
+Content-Type: application/json
+
+{
+    "team_id": 4,
+    "progress_description": "Completed the initial backend implementation and API testing.",
+    "progress_percentage": 50
+}
+
+### Student - Set Privacy
+POST http://localhost:5000/api/privacy-settings
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdHVkZW50X2lkIjoyLCJlbWFpbCI6Im5ld3N0dWRlbnRAZXhhbXBsZS5jb20iLCJyb2xlIjoic3R1ZGVudCIsImlhdCI6MTc4ODYyMTc4NiwiZXhwIjoxNzg4NjI1Mzg2fQ.cUirvWRTv1-WVsiEEo-7_Nn9rt3v77fhvJ45matWlNU
+Content-Type: application/json
+
+{
+    "idea_id": "6a9071587a589410c55d9de8",
+    "visibility": "public"
+}
+
+### Security Test - Unauthorized Team Creation
+POST http://localhost:5000/api/teams
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdHVkZW50X2lkIjoyLCJlbWFpbCI6Im5ld3N0dWRlbnRAZXhhbXBsZS5jb20iLCJyb2xlIjoic3R1ZGVudCIsImlhdCI6MTc4ODYyNTAyOSwiZXhwIjoxNzg4NjI4NjI5fQ.HqZ8RIYKpZxZI9WOssJqfxGP1qfbN6jQ4-X872cxyBY
+Content-Type: application/json
+
+{
+    "idea_id": "6a9071587a589410c55d9de8",
+    "team_name": "Unauthorized Team",
+    "team_description": "Security test"
+}
+
+### different student
+POST http://localhost:5000/api/register
+Content-Type: application/json
+
+{
+    "name": "Student Two",
+    "email": "student2@example.com",
+    "password": "123456",
+    "role": "student"
+}
+
+### Register Second Student
+POST http://localhost:5000/api/students
+Content-Type: application/json
+
+{
+    "first_name": "Test",
+    "last_name": "Student",
+    "email": "teststudent2@gmail.com",
+    "password": "Test@12345",
+    "phone": "9876543211",
+    "department": "Computer Science",
+    "year": 3,
+    "skills": ["JavaScript", "MongoDB"],
+    "bio": "Student for authorization testing",
+    "profile_photo": ""
+}
+
+### Login Second Student
+POST http://localhost:5000/api/login
+Content-Type: application/json
+
+{
+    "email": "teststudent2@gmail.com",
+    "password": "Test@12345"
+}
+
+### Security Test - Unauthorized Team Creation
+POST http://localhost:5000/api/teams
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdHVkZW50X2lkIjozLCJlbWFpbCI6InRlc3RzdHVkZW50MkBnbWFpbC5jb20iLCJyb2xlIjoic3R1ZGVudCIsImlhdCI6MTc4ODYyNTUzNiwiZXhwIjoxNzg4NjI5MTM2fQ.AOkW5I1BC2p0UWxHqYC4R-V1pia8syNQ5vUSGC9uNZk  
+Content-Type: application/json
+
+{
+    "idea_id": "6a9071587a589410c55d9de8",
+    "team_name": "Unauthorized Team",
+    "team_description": "Security test"
+}
+
+### Security Test - Unauthorized Team Member Addition
+POST http://localhost:5000/api/team-members
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdHVkZW50X2lkIjozLCJlbWFpbCI6InRlc3RzdHVkZW50MkBnbWFpbC5jb20iLCJyb2xlIjoic3R1ZGVudCIsImlhdCI6MTc4ODYyNTUzNiwiZXhwIjoxNzg4NjI5MTM2fQ.AOkW5I1BC2p0UWxHqYC4R-V1pia8syNQ5vUSGC9uNZk  
+
+Content-Type: application/json
+
+{
+    "team_id": 4,
     "student_id": 3
 }
 
-### Get All Teams
+### Security Test - Unauthorized Team Member Addition
+POST http://localhost:5000/api/team-members
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdHVkZW50X2lkIjozLCJlbWFpbCI6InRlc3RzdHVkZW50MkBnbWFpbC5jb20iLCJyb2xlIjoic3R1ZGVudCIsImlhdCI6MTc4ODYyNTUzNiwiZXhwIjoxNzg4NjI5MTM2fQ.AOkW5I1BC2p0UWxHqYC4R-V1pia8syNQ5vUSGC9uNZk  
+Content-Type: application/json
+
+{
+    "team_id": 4,
+    "student_id": 3
+}
+
+### Security Test - Non-member Progress
+POST http://localhost:5000/api/progress
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdHVkZW50X2lkIjozLCJlbWFpbCI6InRlc3RzdHVkZW50MkBnbWFpbC5jb20iLCJyb2xlIjoic3R1ZGVudCIsImlhdCI6MTc4ODYyNTUzNiwiZXhwIjoxNzg4NjI5MTM2fQ.AOkW5I1BC2p0UWxHqYC4R-V1pia8syNQ5vUSGC9uNZk  
+Content-Type: application/json
+
+{
+    "team_id": 4,
+    "progress_description": "Unauthorized progress submission",
+    "progress_percentage": 50
+}
+
+### Security Test - Unauthorized Privacy Update
+POST http://localhost:5000/api/privacy-settings
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdHVkZW50X2lkIjozLCJlbWFpbCI6InRlc3RzdHVkZW50MkBnbWFpbC5jb20iLCJyb2xlIjoic3R1ZGVudCIsImlhdCI6MTc4ODYyNTUzNiwiZXhwIjoxNzg4NjI5MTM2fQ.AOkW5I1BC2p0UWxHqYC4R-V1pia8syNQ5vUSGC9uNZk  
+Content-Type: application/json
+
+{
+    "idea_id": "YOUR_STUDENT_1_IDEA_OBJECT_ID",
+    "visibility": "Private"
+}
+
+### Security Test - Unauthorized Privacy Update
+POST http://localhost:5000/api/privacy-settings
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdHVkZW50X2lkIjozLCJlbWFpbCI6InRlc3RzdHVkZW50MkBnbWFpbC5jb20iLCJyb2xlIjoic3R1ZGVudCIsImlhdCI6MTc4ODYyNTUzNiwiZXhwIjoxNzg4NjI5MTM2fQ.AOkW5I1BC2p0UWxHqYC4R-V1pia8syNQ5vUSGC9uNZk  
+Content-Type: application/json
+
+{
+    "idea_id": "ACTUAL_MONGODB_OBJECT_ID",
+    "visibility": "Private"
+}
+
+### Get Ideas
+GET http://localhost:5000/api/ideas
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdHVkZW50X2lkIjoyLCJlbWFpbCI6Im5ld3N0dWRlbnRAZXhhbXBsZS5jb20iLCJyb2xlIjoic3R1ZGVudCIsImlhdCI6MTc4ODYyMTc4NiwiZXhwIjoxNzg4NjI1Mzg2fQ.cUirvWRTv1-WVsiEEo-7_Nn9rt3v77fhvJ45matWlNU
+
+### Security Test - Unauthorized Privacy Update
+POST http://localhost:5000/api/privacy-settings
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdHVkZW50X2lkIjozLCJlbWFpbCI6InRlc3RzdHVkZW50MkBnbWFpbC5jb20iLCJyb2xlIjoic3R1ZGVudCIsImlhdCI6MTc4ODYyNTUzNiwiZXhwIjoxNzg4NjI5MTM2fQ.AOkW5I1BC2p0UWxHqYC4R-V1pia8syNQ5vUSGC9uNZk  
+Content-Type: application/json
+
+{
+    "idea_id": "6a8edbf51987e45269b537e1",
+    "visibility": "Private"
+}
+
+### Security Test - Student Cannot Provide Feedback
+POST http://localhost:5000/api/feedback
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdHVkZW50X2lkIjozLCJlbWFpbCI6InRlc3RzdHVkZW50MkBnbWFpbC5jb20iLCJyb2xlIjoic3R1ZGVudCIsImlhdCI6MTc4ODYyNTUzNiwiZXhwIjoxNzg4NjI5MTM2fQ.AOkW5I1BC2p0UWxHqYC4R-V1pia8syNQ5vUSGC9uNZk
+Content-Type: application/json
+
+{
+    "team_id": 4,
+    "comments": "Unauthorized feedback",
+    "suggestions": "Test suggestion",
+    "rating": 5
+}
+
+### Security Test - Student Cannot View Mentor Feedback Endpoint
+GET http://localhost:5000/api/feedback
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdHVkZW50X2lkIjozLCJlbWFpbCI6InRlc3RzdHVkZW50MkBnbWFpbC5jb20iLCJyb2xlIjoic3R1ZGVudCIsImlhdCI6MTc4ODYyNTUzNiwiZXhwIjoxNzg4NjI5MTM2fQ.AOkW5I1BC2p0UWxHqYC4R-V1pia8syNQ5vUSGC9uNZk
+
+### Security Test - Student Cannot View Mentor Guidance Requests
+GET http://localhost:5000/api/mentor/guidance-requests
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdHVkZW50X2lkIjozLCJlbWFpbCI6InRlc3RzdHVkZW50MkBnbWFpbC5jb20iLCJyb2xlIjoic3R1ZGVudCIsImlhdCI6MTc4ODYyNTUzNiwiZXhwIjoxNzg4NjI5MTM2fQ.AOkW5I1BC2p0UWxHqYC4R-V1pia8syNQ5vUSGC9uNZk
+
+### Security Test - Student Notifications
+GET http://localhost:5000/api/notifications
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdHVkZW50X2lkIjoyLCJlbWFpbCI6Im5ld3N0dWRlbnRAZXhhbXBsZS5jb20iLCJyb2xlIjoic3R1ZGVudCIsImlhdCI6MTc4ODYyNTAyOSwiZXhwIjoxNzg4NjI4NjI5fQ.HqZ8RIYKpZxZI9WOssJqfxGP1qfbN6jQ4-X872cxyBY
+
+### Security Test - Mentor Cannot Send Guidance Request
+POST http://localhost:5000/api/collaboration-requests
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJtZW50b3JfaWQiOjIsImVtYWlsIjoibmV3bWVudG9yQGV4YW1wbGUuY29tIiwicm9sZSI6Im1lbnRvciIsImlhdCI6MTc4ODYyNjUwMSwiZXhwIjoxNzg4NjMwMTAxfQ.bak9reWY626OdMgerO5qOQjiTGOB7nznDm9xyzsmmCw
+
+
+{
+    "idea_id": "6a8edbf51987e45269b537e1",
+    "mentor_id": 2,
+    "request_message": "Unauthorized guidance request test"
+}
+
+### Security Test - Mentor Cannot Send Guidance Request
+POST http://localhost:5000/api/collaboration-requests
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJtZW50b3JfaWQiOjIsImVtYWlsIjoibmV3bWVudG9yQGV4YW1wbGUuY29tIiwicm9sZSI6Im1lbnRvciIsImlhdCI6MTc4ODYyNjUwMSwiZXhwIjoxNzg4NjMwMTAxfQ.bak9reWY626OdMgerO5qOQjiTGOB7nznDm9xyzsmmCw
+Content-Type: application/json
+
+{
+    "idea_id": "6a8edbf51987e45269b537e1",
+    "mentor_id": 2,
+    "request_message": "Unauthorized guidance request test"
+}
+
+### Register Mentor 2
+POST http://localhost:5000/api/mentors
+Content-Type: application/json
+
+{
+    "first_name": "Test",
+    "last_name": "Mentor",
+    "email": "testmentor2@gmail.com",
+    "password": "Test@12345",
+    "phone": "9876543212",
+    "expertise": ["Artificial Intelligence", "Web Development"],
+    "experience_years": 5,
+    "bio": "Second mentor for authorization testing"
+}
+
+### Mentor 2 Login
+POST http://localhost:5000/api/mentor-login
+Content-Type: application/json
+
+{
+    "email": "testmentor2@gmail.com",
+    "password": "Test@12345"
+}
+
+### Mentor 2 Login
+POST http://localhost:5000/api/mentor-login
+Content-Type: application/json
+
+{
+    "email": "testmentor2@gmail.com",
+    "password": "Test@12345"
+}
+
+### Security Test - Mentor Cannot Accept Another Mentor's Request
+PUT http://localhost:5000/api/collaboration-requests/5/accept
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJtZW50b3JfaWQiOjQsImVtYWlsIjoidGVzdG1lbnRvcjJAZ21haWwuY29tIiwicm9sZSI6Im1lbnRvciIsImlhdCI6MTc4ODYyNjkwNCwiZXhwIjoxNzg4NjMwNTA0fQ.fQ8J_Nz5WqfutaCSxwxY1QfjGcu5MvY9RW826zkKDd0
+Content-Type: application/json
+
+### Security Test - Mentor Cannot Accept Another Mentor's Request
+POST http://localhost:5000/api/mentor/guidance-requests/5/accept
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJtZW50b3JfaWQiOjQsImVtYWlsIjoidGVzdG1lbnRvcjJAZ21haWwuY29tIiwicm9sZSI6Im1lbnRvciIsImlhdCI6MTc4ODYyNjkwNCwiZXhwIjoxNzg4NjMwNTA0fQ.fQ8J_Nz5WqfutaCSxwxY1QfjGcu5MvY9RW826zkKDd0
+Content-Type: application/json
+
+### Get Guidance Requests
+GET http://localhost:5000/api/mentor/guidance-requests
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJtZW50b3JfaWQiOjIsImVtYWlsIjoibmV3bWVudG9yQGV4YW1wbGUuY29tIiwicm9sZSI6Im1lbnRvciIsImlhdCI6MTc4ODYyNjUwMSwiZXhwIjoxNzg4NjMwMTAxfQ.bak9reWY626OdMgerO5qOQjiTGOB7nznDm9xyzsmmCw
+
+### Security Test - Mentor Cannot Accept Another Mentor's Request
+POST http://localhost:5000/api/mentor/guidance-requests/8/accept
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJtZW50b3JfaWQiOjQsImVtYWlsIjoidGVzdG1lbnRvcjJAZ21haWwuY29tIiwicm9sZSI6Im1lbnRvciIsImlhdCI6MTc4ODYyNjkwNCwiZXhwIjoxNzg4NjMwNTA0fQ.fQ8J_Nz5WqfutaCSxwxY1QfjGcu5MvY9RW826zkKDd0
+
+### Check Mentor Guidance Requests
+GET http://localhost:5000/api/mentor/guidance-requests
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJtZW50b3JfaWQiOjIsImVtYWlsIjoibmV3bWVudG9yQGV4YW1wbGUuY29tIiwicm9sZSI6Im1lbnRvciIsImlhdCI6MTc4ODYyNjUwMSwiZXhwIjoxNzg4NjMwMTAxfQ.bak9reWY626OdMgerO5qOQjiTGOB7nznDm9xyzsmmCw
+
+### Create Pending Request for Mentor 1
+POST http://localhost:5000/api/collaboration-requests
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdHVkZW50X2lkIjoyLCJlbWFpbCI6Im5ld3N0dWRlbnRAZXhhbXBsZS5jb20iLCJyb2xlIjoic3R1ZGVudCIsImlhdCI6MTc4ODYyNTAyOSwiZXhwIjoxNzg4NjI4NjI5fQ.HqZ8RIYKpZxZI9WOssJqfxGP1qfbN6jQ4-X872cxyBY
+Content-Type: application/json
+
+{
+    "idea_id": "6a9071587a589410c55d9de8",
+    "mentor_id": 2,
+    "request_message": "Security testing - Mentor ownership"
+}
+
+### Security Test - Mentor 2 Cannot Accept Mentor 1's Request
+POST http://localhost:5000/api/mentor/guidance-requests/9/accept
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJtZW50b3JfaWQiOjQsImVtYWlsIjoidGVzdG1lbnRvcjJAZ21haWwuY29tIiwicm9sZSI6Im1lbnRvciIsImlhdCI6MTc4ODYyNjkwNCwiZXhwIjoxNzg4NjMwNTA0fQ.fQ8J_Nz5WqfutaCSxwxY1QfjGcu5MvY9RW826zkKDd0
+
+
+Content-Type: application/json
+
+### Security Test - Mentor 2 Cannot Accept Mentor 1's Request
+POST http://localhost:5000/api/mentor/guidance-requests/9/accept
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJtZW50b3JfaWQiOjQsImVtYWlsIjoidGVzdG1lbnRvcjJAZ21haWwuY29tIiwicm9sZSI6Im1lbnRvciIsImlhdCI6MTc4ODYyNjkwNCwiZXhwIjoxNzg4NjMwNTA0fQ.fQ8J_Nz5WqfutaCSxwxY1QfjGcu5MvY9RW826zkKDd0
+Content-Type: application/json
+
+### Security Test - Mentor 2 Cannot Reject Mentor 1's Request
+POST http://localhost:5000/api/mentor/guidance-requests/9/reject
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJtZW50b3JfaWQiOjQsImVtYWlsIjoidGVzdG1lbnRvcjJAZ21haWwuY29tIiwicm9sZSI6Im1lbnRvciIsImlhdCI6MTc4ODYyNjkwNCwiZXhwIjoxNzg4NjMwNTA0fQ.fQ8J_Nz5WqfutaCSxwxY1QfjGcu5MvY9RW826zkKDd0
+Content-Type: application/json
+
+### Valid Test - Mentor 1 Accepts Own Request
+POST http://localhost:5000/api/mentor/guidance-requests/9/accept
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJtZW50b3JfaWQiOjIsImVtYWlsIjoibmV3bWVudG9yQGV4YW1wbGUuY29tIiwicm9sZSI6Im1lbnRvciIsImlhdCI6MTc4ODYyNjUwMSwiZXhwIjoxNzg4NjMwMTAxfQ.bak9reWY626OdMgerO5qOQjiTGOB7nznDm9xyzsmmCw
+Content-Type: application/json
+
+### Verify Guidance Acceptance Notification
+GET http://localhost:5000/api/notifications
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdHVkZW50X2lkIjoyLCJlbWFpbCI6Im5ld3N0dWRlbnRAZXhhbXBsZS5jb20iLCJyb2xlIjoic3R1ZGVudCIsImlhdCI6MTc4ODYyODg1MiwiZXhwIjoxNzg4NjMyNDUyfQ.mHAMNOATKIeQGqeSLrUFB8AWKS2flqOymM0y9h06-Gw
+
+### Student - View My Guidance Requests
+GET http://localhost:5000/api/student/guidance-requests
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdHVkZW50X2lkIjoyLCJlbWFpbCI6Im5ld3N0dWRlbnRAZXhhbXBsZS5jb20iLCJyb2xlIjoic3R1ZGVudCIsImlhdCI6MTc4ODY5MjM4MiwiZXhwIjoxNzg4Njk1OTgyfQ._Fmxjb44W9sU01YCl4kaHwqh1vSoH2p9hQpFl_I-8Aw
+
+### Browse Ideas
+GET http://localhost:5000/api/ideas
+
+### Check Privacy Settings
+GET http://localhost:5000/api/privacy-settings
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdHVkZW50X2lkIjoyLCJlbWFpbCI6Im5ld3N0dWRlbnRAZXhhbXBsZS5jb20iLCJyb2xlIjoic3R1ZGVudCIsImlhdCI6MTc4ODY5MjM4MiwiZXhwIjoxNzg4Njk1OTgyfQ._Fmxjb44W9sU01YCl4kaHwqh1vSoH2p9hQpFl_I-8Aw
+
+### ideas
+GET http://localhost:5000/api/ideas
+
+### Get Teams
 GET http://localhost:5000/api/teams
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdHVkZW50X2lkIjo0LCJlbWFpbCI6Im5ld3N0dWRlbnRAdGVzdC5jb20iLCJyb2xlIjoic3R1ZGVudCIsImlhdCI6MTc5MDI3MzQ3NywiZXhwIjoxNzkwMjc3MDc3fQ.kJ7xDG_9JwwBzfrpdiMw6f2FpHBJM63Ho9ER-OqJlZU
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdHVkZW50X2lkIjoyLCJlbWFpbCI6Im5ld3N0dWRlbnRAZXhhbXBsZS5jb20iLCJyb2xlIjoic3R1ZGVudCIsImlhdCI6MTc4ODY5MjM4MiwiZXhwIjoxNzg4Njk1OTgyfQ._Fmxjb44W9sU01YCl4kaHwqh1vSoH2p9hQpFl_I-8Aw
 
-
-### Get All Team Members
+### Get Team Members
 GET http://localhost:5000/api/team-members
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdHVkZW50X2lkIjo0LCJlbWFpbCI6Im5ld3N0dWRlbnRAdGVzdC5jb20iLCJyb2xlIjoic3R1ZGVudCIsImlhdCI6MTc5MDI3MzQ3NywiZXhwIjoxNzkwMjc3MDc3fQ.kJ7xDG_9JwwBzfrpdiMw6f2FpHBJM63Ho9ER-OqJlZU
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdHVkZW50X2lkIjoyLCJlbWFpbCI6Im5ld3N0dWRlbnRAZXhhbXBsZS5jb20iLCJyb2xlIjoic3R1ZGVudCIsImlhdCI6MTc4ODY5MjM4MiwiZXhwIjoxNzg4Njk1OTgyfQ._Fmxjb44W9sU01YCl4kaHwqh1vSoH2p9hQpFl_I-8Aw
+
+### Get Team 4 Members
+GET http://localhost:5000/api/teams/4/members
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdHVkZW50X2lkIjoyLCJlbWFpbCI6Im5ld3N0dWRlbnRAZXhhbXBsZS5jb20iLCJyb2xlIjoic3R1ZGVudCIsImlhdCI6MTc4ODY5MjM4MiwiZXhwIjoxNzg4Njk1OTgyfQ._Fmxjb44W9sU01YCl4kaHwqh1vSoH2p9hQpFl_I-8Aw
 
 ### Get My Teams
 GET http://localhost:5000/api/student/teams
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdHVkZW50X2lkIjo0LCJlbWFpbCI6Im5ld3N0dWRlbnRAdGVzdC5jb20iLCJyb2xlIjoic3R1ZGVudCIsImlhdCI6MTc5MDI3MzQ3NywiZXhwIjoxNzkwMjc3MDc3fQ.kJ7xDG_9JwwBzfrpdiMw6f2FpHBJM63Ho9ER-OqJlZU
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdHVkZW50X2lkIjoyLCJlbWFpbCI6Im5ld3N0dWRlbnRAZXhhbXBsZS5jb20iLCJyb2xlIjoic3R1ZGVudCIsImlhdCI6MTc4ODY5MjM4MiwiZXhwIjoxNzg4Njk1OTgyfQ._Fmxjb44W9sU01YCl4kaHwqh1vSoH2p9hQpFl_I-8Aw
 
-### Get Team Details
-GET http://localhost:5000/api/teams/7
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdHVkZW50X2lkIjo0LCJlbWFpbCI6Im5ld3N0dWRlbnRAdGVzdC5jb20iLCJyb2xlIjoic3R1ZGVudCIsImlhdCI6MTc5MDI3MzQ3NywiZXhwIjoxNzkwMjc3MDc3fQ.kJ7xDG_9JwwBzfrpdiMw6f2FpHBJM63Ho9ER-OqJlZU
+### Get Team 4 Details
+GET http://localhost:5000/api/teams/4
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdHVkZW50X2lkIjoyLCJlbWFpbCI6Im5ld3N0dWRlbnRAZXhhbXBsZS5jb20iLCJyb2xlIjoic3R1ZGVudCIsImlhdCI6MTc4ODY5MjM4MiwiZXhwIjoxNzg4Njk1OTgyfQ._Fmxjb44W9sU01YCl4kaHwqh1vSoH2p9hQpFl_I-8Aw
 
-### Update Team Progress
-POST http://localhost:5000/api/progress
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdHVkZW50X2lkIjo0LCJlbWFpbCI6Im5ld3N0dWRlbnRAdGVzdC5jb20iLCJyb2xlIjoic3R1ZGVudCIsImlhdCI6MTc5MDI3MzQ3NywiZXhwIjoxNzkwMjc3MDc3fQ.kJ7xDG_9JwwBzfrpdiMw6f2FpHBJM63Ho9ER-OqJlZU
-Content-Type: application/json
+### Get Team 4 Progress
+GET http://localhost:5000/api/teams/4/progress
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdHVkZW50X2lkIjoyLCJlbWFpbCI6Im5ld3N0dWRlbnRAZXhhbXBsZS5jb20iLCJyb2xlIjoic3R1ZGVudCIsImlhdCI6MTc4ODY5MjM4MiwiZXhwIjoxNzg4Njk1OTgyfQ._Fmxjb44W9sU01YCl4kaHwqh1vSoH2p9hQpFl_I-8Aw
 
-{
-    "team_id": 7,
-    "progress_percentage": 40,
-    "description": "Initial project development completed"
-}
-
-### Get Team Progress
-GET http://localhost:5000/api/progress/7
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdHVkZW50X2lkIjo0LCJlbWFpbCI6Im5ld3N0dWRlbnRAdGVzdC5jb20iLCJyb2xlIjoic3R1ZGVudCIsImlhdCI6MTc5MDI3MzQ3NywiZXhwIjoxNzkwMjc3MDc3fQ.kJ7xDG_9JwwBzfrpdiMw6f2FpHBJM63Ho9ER-OqJlZU
-
-### Submit Mentor Feedback
+### Test Invalid Feedback Rating
 POST http://localhost:5000/api/feedback
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJtZW50b3JfaWQiOjUsImVtYWlsIjoidGVzdG1lbnRvckB0ZXN0LmNvbSIsInJvbGUiOiJtZW50b3IiLCJpYXQiOjE3OTAyNzQ1NDAsImV4cCI6MTc5MDI3ODE0MH0.CbFF40QeI_JQUPZXzP1HWTatGvU3FbzwDXUQ7j99NB0
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJtZW50b3JfaWQiOjIsImVtYWlsIjoibmV3bWVudG9yQGV4YW1wbGUuY29tIiwicm9sZSI6Im1lbnRvciIsImlhdCI6MTc4ODY5MzI2MywiZXhwIjoxNzg4Njk2ODYzfQ.1vs_H5fwxBnnDC2nNQlfOLMf6DVM0u-y75JWfkzKPMA
 
 Content-Type: application/json
 
 {
-    "team_id": 7,
-    "feedback": "The project idea is good. Improve the implementation plan and testing strategy."
+    "team_id": 4,
+    "comments": "Testing invalid rating",
+    "suggestions": "Testing validation",
+    "rating": 10
+}
+### Test Invalid Feedback Rating
+POST http://localhost:5000/api/feedback
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJtZW50b3JfaWQiOjIsImVtYWlsIjoibmV3bWVudG9yQGV4YW1wbGUuY29tIiwicm9sZSI6Im1lbnRvciIsImlhdCI6MTc4ODY5MzI2MywiZXhwIjoxNzg4Njk2ODYzfQ.1vs_H5fwxBnnDC2nNQlfOLMf6DVM0u-y75JWfkzKPMA
+Content-Type: application/json
+
+{
+    "team_id": 4,
+    "comments": "Testing invalid rating",
+    "suggestions": "Testing validation",
+    "rating": 10
 }
 
-### Send guidance request
+### Test Invalid Progress Percentage
+POST http://localhost:5000/api/progress
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdHVkZW50X2lkIjoyLCJlbWFpbCI6Im5ld3N0dWRlbnRAZXhhbXBsZS5jb20iLCJyb2xlIjoic3R1ZGVudCIsImlhdCI6MTc4ODY5MjM4MiwiZXhwIjoxNzg4Njk1OTgyfQ._Fmxjb44W9sU01YCl4kaHwqh1vSoH2p9hQpFl_I-8Aw
+Content-Type: application/json
+
+{
+    "team_id": 4,
+    "progress_description": "Testing invalid progress",
+    "progress_percentage": 150
+}
+### Test Missing Idea Title
+POST http://localhost:5000/api/ideas
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdHVkZW50X2lkIjoyLCJlbWFpbCI6Im5ld3N0dWRlbnRAZXhhbXBsZS5jb20iLCJyb2xlIjoic3R1ZGVudCIsImlhdCI6MTc4ODY5MjM4MiwiZXhwIjoxNzg4Njk1OTgyfQ._Fmxjb44W9sU01YCl4kaHwqh1vSoH2p9hQpFl_I-8Aw
+Content-Type: application/json
+
+{
+    "description": "Testing required field validation",
+    "category": "Technology",
+    "requiredSkills": ["Java"],
+    "technologyStack": ["Node.js"],
+    "problemStatement": "Testing validation",
+    "expectedOutcome": "Request should be rejected",
+    "status": "Open"
+}
+
+### Test Missing Idea Title
+POST http://localhost:5000/api/ideas
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdHVkZW50X2lkIjoyLCJlbWFpbCI6Im5ld3N0dWRlbnRAZXhhbXBsZS5jb20iLCJyb2xlIjoic3R1ZGVudCIsImlhdCI6MTc4ODY5MjM4MiwiZXhwIjoxNzg4Njk1OTgyfQ._Fmxjb44W9sU01YCl4kaHwqh1vSoH2p9hQpFl_I-8Aw
+Content-Type: application/json
+
+{
+    "description": "Testing required field validation",
+    "category": "Technology",
+    "requiredSkills": ["Java"],
+    "technologyStack": ["Node.js"],
+    "problemStatement": "Testing validation",
+    "expectedOutcome": "Request should be rejected",
+    "status": "Open"
+
+}
+
+### Test Invalid Idea ID
+POST http://localhost:5000/api/privacy-settings
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdHVkZW50X2lkIjoyLCJlbWFpbCI6Im5ld3N0dWRlbnRAZXhhbXBsZS5jb20iLCJyb2xlIjoic3R1ZGVudCIsImlhdCI6MTc4ODY5MjM4MiwiZXhwIjoxNzg4Njk1OTgyfQ._Fmxjb44W9sU01YCl4kaHwqh1vSoH2p9hQpFl_I-8Aw
+Content-Type: application/json
+
+
+{
+    "idea_id": "invalid-id",
+    "visibility": "Private"
+}
+
+### Test Invalid Mentor Reference
 POST http://localhost:5000/api/collaboration-requests
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdHVkZW50X2lkIjoyLCJlbWFpbCI6Im5ld3N0dWRlbnRAZXhhbXBsZS5jb20iLCJyb2xlIjoic3R1ZGVudCIsImlhdCI6MTc4ODY5MjM4MiwiZXhwIjoxNzg4Njk1OTgyfQ._Fmxjb44W9sU01YCl4kaHwqh1vSoH2p9hQpFl_I-8Aw
 Content-Type: application/json
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdHVkZW50X2lkIjo0LCJlbWFpbCI6Im5ld3N0dWRlbnRAdGVzdC5jb20iLCJyb2xlIjoic3R1ZGVudCIsImlhdCI6MTc5MTQ4NDE4MiwiZXhwIjoxNzkxNDg3NzgyfQ.4fpV_uKzVOkoOUxvB7C_YdVy_5hzVGC5oY-M9hR1P_I
 
 {
-    "idea_id": "6ab55a2b780cc5fcd1b540d5",
-    "mentor_id": 1
+    "idea_id": "6a9071587a589410c55d9de8",
+    "mentor_id": 99999,
+    "request_message": "Testing invalid mentor reference"
 }
 
-### Mentor views guidance requests
+### Test Guidance Request Idea Ownership
+POST http://localhost:5000/api/collaboration-requests
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdHVkZW50X2lkIjoyLCJlbWFpbCI6Im5ld3N0dWRlbnRAZXhhbXBsZS5jb20iLCJyb2xlIjoic3R1ZGVudCIsImlhdCI6MTc4ODY5MjM4MiwiZXhwIjoxNzg4Njk1OTgyfQ._Fmxjb44W9sU01YCl4kaHwqh1vSoH2p9hQpFl_I-8Aw
+Content-Type: application/json
+
+{
+    "idea_id": "6a9071587a589410c55d9de8",
+    "mentor_id": 2,
+    "request_message": "Testing idea ownership validation"
+}
+###request processing
 GET http://localhost:5000/api/mentor/guidance-requests
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJtZW50b3JfaWQiOjUsImVtYWlsIjoidGVzdG1lbnRvckB0ZXN0LmNvbSIsInJvbGUiOiJtZW50b3IiLCJpYXQiOjE3OTE0ODQzODYsImV4cCI6MTc5MTQ4Nzk4Nn0.01PNDUZi0qs5oDeB2Eazd81m7-okT_jUUceatPaDQiU
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJtZW50b3JfaWQiOjIsImVtYWlsIjoibmV3bWVudG9yQGV4YW1wbGUuY29tIiwicm9sZSI6Im1lbnRvciIsImlhdCI6MTc4ODY5MzI2MywiZXhwIjoxNzg4Njk2ODYzfQ.1vs_H5fwxBnnDC2nNQlfOLMf6DVM0u-y75JWfkzKPMA
 
+###requestp
+POST http://localhost:5000/api/mentor/guidance-requests/5/accept
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJtZW50b3JfaWQiOjIsImVtYWlsIjoibmV3bWVudG9yQGV4YW1wbGUuY29tIiwicm9sZSI6Im1lbnRvciIsImlhdCI6MTc4ODY5MzI2MywiZXhwIjoxNzg4Njk2ODYzfQ.1vs_H5fwxBnnDC2nNQlfOLMf6DVM0u-y75JWfkzKPMA
+Content-Type: application/json
 
-### Mentor accepts guidance request
-PUT http://localhost:5000/api/collaboration-requests/13/accept
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJtZW50b3JfaWQiOjUsImVtYWlsIjoidGVzdG1lbnRvckB0ZXN0LmNvbSIsInJvbGUiOiJtZW50b3IiLCJpYXQiOjE3OTE0ODQzODYsImV4cCI6MTc5MTQ4Nzk4Nn0.01PNDUZi0qs5oDeB2Eazd81m7-okT_jUUceatPaDQiU
+{}
 
-### Student views guidance requests
+### notif test
+GET http://localhost:5000/api/notifications
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdHVkZW50X2lkIjoyLCJlbWFpbCI6Im5ld3N0dWRlbnRAZXhhbXBsZS5jb20iLCJyb2xlIjoic3R1ZGVudCIsImlhdCI6MTc4ODY5NjMzMywiZXhwIjoxNzg4Njk5OTMzfQ.y0rQ8rOGE-_TZkPyaDapfGNqlCBc0n8r9UuFEnhmKMU
+
+#### Mark Notification as Read
+PUT http://localhost:5000/api/notifications/NOTIFICATION_ID/read
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdHVkZW50X2lkIjoyLCJlbWFpbCI6Im5ld3N0dWRlbnRAZXhhbXBsZS5jb20iLCJyb2xlIjoic3R1ZGVudCIsImlhdCI6MTc4ODY5NjMzMywiZXhwIjoxNzg4Njk5OTMzfQ.y0rQ8rOGE-_TZkPyaDapfGNqlCBc0n8r9UuFEnhmKMU
+
+##### Mark Notification as Read
+PUT http://localhost:5000/api/notifications/3/read
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdHVkZW50X2lkIjoyLCJlbWFpbCI6Im5ld3N0dWRlbnRAZXhhbXBsZS5jb20iLCJyb2xlIjoic3R1ZGVudCIsImlhdCI6MTc4ODY5NjMzMywiZXhwIjoxNzg4Njk5OTMzfQ.y0rQ8rOGE-_TZkPyaDapfGNqlCBc0n8r9UuFEnhmKMU
+
+###
+PUT http://localhost:5000/api/notifications/read-all
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdHVkZW50X2lkIjoyLCJlbWFpbCI6Im5ld3N0dWRlbnRAZXhhbXBsZS5jb20iLCJyb2xlIjoic3R1ZGVudCIsImlhdCI6MTc4ODY5NjMzMywiZXhwIjoxNzg4Njk5OTMzfQ.y0rQ8rOGE-_TZkPyaDapfGNqlCBc0n8r9UuFEnhmKMU
+###
+GET http://localhost:5000/api/student/teams
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdHVkZW50X2lkIjoyLCJlbWFpbCI6Im5ld3N0dWRlbnRAZXhhbXBsZS5jb20iLCJyb2xlIjoic3R1ZGVudCIsImlhdCI6MTc4ODY5NjMzMywiZXhwIjoxNzg4Njk5OTMzfQ.y0rQ8rOGE-_TZkPyaDapfGNqlCBc0n8r9UuFEnhmKMU
+### Get Team 4 Details
+GET http://localhost:5000/api/teams/4
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdHVkZW50X2lkIjoyLCJlbWFpbCI6Im5ld3N0dWRlbnRAZXhhbXBsZS5jb20iLCJyb2xlIjoic3R1ZGVudCIsImlhdCI6MTc4ODY5NjMzMywiZXhwIjoxNzg4Njk5OTMzfQ.y0rQ8rOGE-_TZkPyaDapfGNqlCBc0n8r9UuFEnhmKMU
+### Test Progress Update
+POST http://localhost:5000/api/progress
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdHVkZW50X2lkIjoyLCJlbWFpbCI6Im5ld3N0dWRlbnRAZXhhbXBsZS5jb20iLCJyb2xlIjoic3R1ZGVudCIsImlhdCI6MTc4ODY5NjMzMywiZXhwIjoxNzg4Njk5OTMzfQ.y0rQ8rOGE-_TZkPyaDapfGNqlCBc0n8r9UuFEnhmKMU
+Content-Type: application/json
+
+{
+    "team_id": 4,
+    "progress_description": "Completed initial project implementation and testing.",
+    "progress_percentage": 60
+}
+### Get Team 4 Progress
+GET http://localhost:5000/api/teams/4/progress
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdHVkZW50X2lkIjoyLCJlbWFpbCI6Im5ld3N0dWRlbnRAZXhhbXBsZS5jb20iLCJyb2xlIjoic3R1ZGVudCIsImlhdCI6MTc4ODY5NjMzMywiZXhwIjoxNzg4Njk5OTMzfQ.y0rQ8rOGE-_TZkPyaDapfGNqlCBc0n8r9UuFEnhmKMU
+
+###
 GET http://localhost:5000/api/student/guidance-requests
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdHVkZW50X2lkIjo0LCJlbWFpbCI6Im5ld3N0dWRlbnRAdGVzdC5jb20iLCJyb2xlIjoic3R1ZGVudCIsImlhdCI6MTc5MTQ4NDE4MiwiZXhwIjoxNzkxNDg3NzgyfQ.4fpV_uKzVOkoOUxvB7C_YdVy_5hzVGC5oY-M9hR1P_I
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdHVkZW50X2lkIjoyLCJlbWFpbCI6Im5ld3N0dWRlbnRAZXhhbXBsZS5jb20iLCJyb2xlIjoic3R1ZGVudCIsImlhdCI6MTc4ODY5NjMzMywiZXhwIjoxNzg4Njk5OTMzfQ.y0rQ8rOGE-_TZkPyaDapfGNqlCBc0n8r9UuFEnhmKMU
+###
+GET http://localhost:5000/api/student/feedback
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdHVkZW50X2lkIjoyLCJlbWFpbCI6Im5ld3N0dWRlbnRAZXhhbXBsZS5jb20iLCJyb2xlIjoic3R1ZGVudCIsImlhdCI6MTc4ODY5NjMzMywiZXhwIjoxNzg4Njk5OTMzfQ.y0rQ8rOGE-_TZkPyaDapfGNqlCBc0n8r9UuFEnhmKMU
+### Mentor 2 Login
+POST http://localhost:5000/api/mentor-login
+Content-Type: application/json
 
-### Backend health check
+{
+    "email": "testmentor2@gmail.com",
+    "password": "Test@12345"
+}
+### Mentor 2 - Browse Ideas
+GET http://localhost:5000/api/ideas
+Authorization: Bearer YOUR_MENTOR_TOKEN
+### Mentor 2 - Get Guidance Requests
+GET http://localhost:5000/api/mentor/guidance-requests
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJtZW50b3JfaWQiOjQsImVtYWlsIjoidGVzdG1lbnRvcjJAZ21haWwuY29tIiwicm9sZSI6Im1lbnRvciIsImlhdCI6MTc4ODY5NzEzOCwiZXhwIjoxNzg4NzAwNzM4fQ.LnlWew-yUh1zfy_LEvwblyW4TzrkYtsGkGQ51GwecRo
+###
+GET http://localhost:5000/api/ideas
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJtZW50b3JfaWQiOjQsImVtYWlsIjoidGVzdG1lbnRvcjJAZ21haWwuY29tIiwicm9sZSI6Im1lbnRvciIsImlhdCI6MTc4ODY5NzAyOCwiZXhwIjoxNzg4NzAwNjI4fQ.uemGRNAnrWGTNu-GOd7T06efzv89sqfttsWllgrHtbo
+### Student 2 - Create Collaboration Request
+POST http://localhost:5000/api/collaboration-requests
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdHVkZW50X2lkIjoyLCJlbWFpbCI6Im5ld3N0dWRlbnRAZXhhbXBsZS5jb20iLCJyb2xlIjoic3R1ZGVudCIsImlhdCI6MTc4ODY5NjMzMywiZXhwIjoxNzg4Njk5OTMzfQ.y0rQ8rOGE-_TZkPyaDapfGNqlCBc0n8r9UuFEnhmKMU
+Content-Type: application/json
+
+{
+  "idea_id": "6a9071587a589410c55d9de8",
+  "mentor_id": 4,
+  "request_message": "I would like your guidance on this project."
+}
+
+###
+GET http://localhost:5000/api/mentor/guidance-requests
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJtZW50b3JfaWQiOjQsImVtYWlsIjoidGVzdG1lbnRvcjJAZ21haWwuY29tIiwicm9sZSI6Im1lbnRvciIsImlhdCI6MTc4ODY5NzAyOCwiZXhwIjoxNzg4NzAwNjI4fQ.uemGRNAnrWGTNu-GOd7T06efzv89sqfttsWllgrHtbo
+
+###
+POST http://localhost:5000/api/mentor/guidance-requests/13/accept
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJtZW50b3JfaWQiOjQsImVtYWlsIjoidGVzdG1lbnRvcjJAZ21haWwuY29tIiwicm9sZSI6Im1lbnRvciIsImlhdCI6MTc4ODY5NzAyOCwiZXhwIjoxNzg4NzAwNjI4fQ.uemGRNAnrWGTNu-GOd7T06efzv89sqfttsWllgrHtbo
+
+###
+GET http://localhost:5000/api/student/guidance-requests
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdHVkZW50X2lkIjoyLCJlbWFpbCI6Im5ld3N0dWRlbnRAZXhhbXBsZS5jb20iLCJyb2xlIjoic3R1ZGVudCIsImlhdCI6MTc4ODY5NjMzMywiZXhwIjoxNzg4Njk5OTMzfQ.y0rQ8rOGE-_TZkPyaDapfGNqlCBc0n8r9UuFEnhmKMU
+###
+GET http://localhost:5000/api/notifications
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdHVkZW50X2lkIjoyLCJlbWFpbCI6Im5ld3N0dWRlbnRAZXhhbXBsZS5jb20iLCJyb2xlIjoic3R1ZGVudCIsImlhdCI6MTc4ODY5NjMzMywiZXhwIjoxNzg4Njk5OTMzfQ.y0rQ8rOGE-_TZkPyaDapfGNqlCBc0n8r9UuFEnhmKMU
+
+###
+POST http://localhost:5000/api/collaboration-requests
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdHVkZW50X2lkIjoyLCJlbWFpbCI6Im5ld3N0dWRlbnRAZXhhbXBsZS5jb20iLCJyb2xlIjoic3R1ZGVudCIsImlhdCI6MTc4ODY5NjMzMywiZXhwIjoxNzg4Njk5OTMzfQ.y0rQ8rOGE-_TZkPyaDapfGNqlCBc0n8r9UuFEnhmKMU
+Content-Type: application/json
+
+{
+  "idea_id": "6a9071587a589410c55d9de8",
+  "mentor_id": 4,
+  "request_message": "Testing the guidance rejection flow."
+}
+
+###
+POST http://localhost:5000/api/mentor/guidance-requests/14/reject
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJtZW50b3JfaWQiOjQsImVtYWlsIjoidGVzdG1lbnRvcjJAZ21haWwuY29tIiwicm9sZSI6Im1lbnRvciIsImlhdCI6MTc4ODY5NzAyOCwiZXhwIjoxNzg4NzAwNjI4fQ.uemGRNAnrWGTNu-GOd7T06efzv89sqfttsWllgrHtbo
+###
+GET http://localhost:5000/api/student/guidance-requests
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdHVkZW50X2lkIjoyLCJlbWFpbCI6Im5ld3N0dWRlbnRAZXhhbXBsZS5jb20iLCJyb2xlIjoic3R1ZGVudCIsImlhdCI6MTc4ODY5NjMzMywiZXhwIjoxNzg4Njk5OTMzfQ.y0rQ8rOGE-_TZkPyaDapfGNqlCBc0n8r9UuFEnhmKMU
+### Verify Guidance Rejection Notification
+GET http://localhost:5000/api/notifications
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdHVkZW50X2lkIjoyLCJlbWFpbCI6Im5ld3N0dWRlbnRAZXhhbXBsZS5jb20iLCJyb2xlIjoic3R1ZGVudCIsImlhdCI6MTc4ODY5NjMzMywiZXhwIjoxNzg4Njk5OTMzfQ.y0rQ8rOGE-_TZkPyaDapfGNqlCBc0n8r9UuFEnhmKMU
+###
+POST http://localhost:5000/api/feedback
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJtZW50b3JfaWQiOjQsImVtYWlsIjoidGVzdG1lbnRvcjJAZ21haWwuY29tIiwicm9sZSI6Im1lbnRvciIsImlhdCI6MTc4ODY5NzAyOCwiZXhwIjoxNzg4NzAwNjI4fQ.uemGRNAnrWGTNu-GOd7T06efzv89sqfttsWllgrHtbo
+Content-Type: application/json
+
+{
+  "team_id": 4,
+  "comments": "The project idea is clear and practical.",
+  "suggestions": "Consider adding real-time monitoring features.",
+  "rating": 5
+}
+### Verify Feedback Submission
+GET http://localhost:5000/api/student/feedback
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdHVkZW50X2lkIjoyLCJlbWFpbCI6Im5ld3N0dWRlbnRAZXhhbXBsZS5jb20iLCJyb2xlIjoic3R1ZGVudCIsImlhdCI6MTc4ODY5NjMzMywiZXhwIjoxNzg4Njk5OTMzfQ.y0rQ8rOGE-_TZkPyaDapfGNqlCBc0n8r9UuFEnhmKMU
+###
+GET http://localhost:5000/api/notifications
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdHVkZW50X2lkIjoyLCJlbWFpbCI6Im5ld3N0dWRlbnRAZXhhbXBsZS5jb20iLCJyb2xlIjoic3R1ZGVudCIsImlhdCI6MTc4ODY5NjMzMywiZXhwIjoxNzg4Njk5OTMzfQ.y0rQ8rOGE-_TZkPyaDapfGNqlCBc0n8r9UuFEnhmKMU
+
+###
+DELETE http://localhost:5000/api/test-cleanup
+
+### Server Health
 GET http://localhost:5000/
 
-### Student guidance requests
+### Student Login
+POST http://localhost:5000/api/login
+Content-Type: application/json
+
+{
+    "email": "newstudent@example.com",
+    "password": "your_student_password"
+}
+
+### Student Teams
+GET http://localhost:5000/api/student/teams
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdHVkZW50X2lkIjoyLCJlbWFpbCI6Im5ld3N0dWRlbnRAZXhhbXBsZS5jb20iLCJyb2xlIjoic3R1ZGVudCIsImlhdCI6MTc4ODY5OTEwOSwiZXhwIjoxNzg4NzAyNzA5fQ._7ZIXgLZBydcPb-liMOO8cFuGHldBjfuNe8V89eWlhc
+
+### Team 4 Details
+GET http://localhost:5000/api/teams/4
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdHVkZW50X2lkIjoyLCJlbWFpbCI6Im5ld3N0dWRlbnRAZXhhbXBsZS5jb20iLCJyb2xlIjoic3R1ZGVudCIsImlhdCI6MTc4ODY5OTEwOSwiZXhwIjoxNzg4NzAyNzA5fQ._7ZIXgLZBydcPb-liMOO8cFuGHldBjfuNe8V89eWlhc
+
+### Submit Progress
+POST http://localhost:5000/api/progress
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdHVkZW50X2lkIjoyLCJlbWFpbCI6Im5ld3N0dWRlbnRAZXhhbXBsZS5jb20iLCJyb2xlIjoic3R1ZGVudCIsImlhdCI6MTc4ODY5OTEwOSwiZXhwIjoxNzg4NzAyNzA5fQ._7ZIXgLZBydcPb-liMOO8cFuGHldBjfuNe8V89eWlhc
+Content-Type: application/json
+
+{
+    "team_id": 4,
+    "progress_description": "Final backend verification",
+    "progress_percentage": 70
+}
+
+### Team 4 Progress
+GET http://localhost:5000/api/teams/4/progress
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdHVkZW50X2lkIjoyLCJlbWFpbCI6Im5ld3N0dWRlbnRAZXhhbXBsZS5jb20iLCJyb2xlIjoic3R1ZGVudCIsImlhdCI6MTc4ODY5OTEwOSwiZXhwIjoxNzg4NzAyNzA5fQ._7ZIXgLZBydcPb-liMOO8cFuGHldBjfuNe8V89eWlhc
+
+### Student Guidance Requests
 GET http://localhost:5000/api/student/guidance-requests
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdHVkZW50X2lkIjo0LCJlbWFpbCI6Im5ld3N0dWRlbnRAdGVzdC5jb20iLCJyb2xlIjoic3R1ZGVudCIsImlhdCI6MTc5MTQ4NDE4MiwiZXhwIjoxNzkxNDg3NzgyfQ.4fpV_uKzVOkoOUxvB7C_YdVy_5hzVGC5oY-M9hR1P_I
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdHVkZW50X2lkIjoyLCJlbWFpbCI6Im5ld3N0dWRlbnRAZXhhbXBsZS5jb20iLCJyb2xlIjoic3R1ZGVudCIsImlhdCI6MTc4ODY5OTEwOSwiZXhwIjoxNzg4NzAyNzA5fQ._7ZIXgLZBydcPb-liMOO8cFuGHldBjfuNe8V89eWlhc
 
-### Mentor guidance requests
-GET http://localhost:5000/api/mentor/guidance-requests
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJtZW50b3JfaWQiOjUsImVtYWlsIjoidGVzdG1lbnRvckB0ZXN0LmNvbSIsInJvbGUiOiJtZW50b3IiLCJpYXQiOjE3OTE0ODQzODYsImV4cCI6MTc5MTQ4Nzk4Nn0.01PNDUZi0qs5oDeB2Eazd81m7-okT_jUUceatPaDQiU
-
-### Create notification
-POST http://localhost:5000/api/notifications
-Content-Type: application/json
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdHVkZW50X2lkIjo0LCJlbWFpbCI6Im5ld3N0dWRlbnRAdGVzdC5jb20iLCJyb2xlIjoic3R1ZGVudCIsImlhdCI6MTc5MTQ4NDE4MiwiZXhwIjoxNzkxNDg3NzgyfQ.4fpV_uKzVOkoOUxvB7C_YdVy_5hzVGC5oY-M9hR1P_I
-
-{
-    "user_id": 4,
-    "user_role": "student",
-    "message": "Your mentorship request has been accepted.",
-    "type": "mentorship"
-}
-
-### Get student notifications
-GET http://localhost:5000/api/student/notifications
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdHVkZW50X2lkIjo0LCJlbWFpbCI6Im5ld3N0dWRlbnRAdGVzdC5jb20iLCJyb2xlIjoic3R1ZGVudCIsImlhdCI6MTc5MTQ4NDE4MiwiZXhwIjoxNzkxNDg3NzgyfQ.4fpV_uKzVOkoOUxvB7C_YdVy_5hzVGC5oY-M9hR1P_I
-
-### Mark notification as read
-PUT http://localhost:5000/api/notifications/15/read
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdHVkZW50X2lkIjo0LCJlbWFpbCI6Im5ld3N0dWRlbnRAdGVzdC5jb20iLCJyb2xlIjoic3R1ZGVudCIsImlhdCI6MTc5MTQ4NDE4MiwiZXhwIjoxNzkxNDg3NzgyfQ.4fpV_uKzVOkoOUxvB7C_YdVy_5hzVGC5oY-M9hR1P_I
-
-### Mark all notifications as read
-PUT http://localhost:5000/api/notifications/read-all
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdHVkZW50X2lkIjo0LCJlbWFpbCI6Im5ld3N0dWRlbnRAdGVzdC5jb20iLCJyb2xlIjoic3R1ZGVudCIsImlhdCI6MTc5MTQ4NDE4MiwiZXhwIjoxNzkxNDg3NzgyfQ.4fpV_uKzVOkoOUxvB7C_YdVy_5hzVGC5oY-M9hR1P_I
-
-### Create privacy settings
-POST http://localhost:5000/api/privacy-settings
-Content-Type: application/json
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdHVkZW50X2lkIjo0LCJlbWFpbCI6Im5ld3N0dWRlbnRAdGVzdC5jb20iLCJyb2xlIjoic3R1ZGVudCIsImlhdCI6MTc5MTQ4NDE4MiwiZXhwIjoxNzkxNDg3NzgyfQ.4fpV_uKzVOkoOUxvB7C_YdVy_5hzVGC5oY-M9hR1P_I
-
-{
-    "idea_id": 6ab55a2b780cc5fcd1b540d5
-    "visibility": "private"
-}
-
-### Create privacy settings
-POST http://localhost:5000/api/privacy-settings
-Content-Type: application/json
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdHVkZW50X2lkIjo0LCJlbWFpbCI6Im5ld3N0dWRlbnRAdGVzdC5jb20iLCJyb2xlIjoic3R1ZGVudCIsImlhdCI6MTc5MTQ4NDE4MiwiZXhwIjoxNzkxNDg3NzgyfQ.4fpV_uKzVOkoOUxvB7C_YdVy_5hzVGC5oY-M9hR1P_I
-
-{
-    "idea_id": 7,
-    "visibility": "private"
-}
-
-### Create privacy settings
-POST http://localhost:5000/api/privacy-settings
-Content-Type: application/json
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdHVkZW50X2lkIjo0LCJlbWFpbCI6Im5ld3N0dWRlbnRAdGVzdC5jb20iLCJyb2xlIjoic3R1ZGVudCIsImlhdCI6MTc5MTQ4NDE4MiwiZXhwIjoxNzkxNDg3NzgyfQ.4fpV_uKzVOkoOUxvB7C_YdVy_5hzVGC5oY-M9hR1P_I
-
-{
-    "idea_id": CORRECT_IDEA_ID,
-    "visibility": "private"
-}
-
-### Student views feedback
+### Student Feedback
 GET http://localhost:5000/api/student/feedback
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdHVkZW50X2lkIjo0LCJlbWFpbCI6Im5ld3N0dWRlbnRAdGVzdC5jb20iLCJyb2xlIjoic3R1ZGVudCIsImlhdCI6MTc5MTQ4NDE4MiwiZXhwIjoxNzkxNDg3NzgyfQ.4fpV_uKzVOkoOUxvB7C_YdVy_5hzVGC5oY-M9hR1P_I
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdHVkZW50X2lkIjoyLCJlbWFpbCI6Im5ld3N0dWRlbnRAZXhhbXBsZS5jb20iLCJyb2xlIjoic3R1ZGVudCIsImlhdCI6MTc4ODY5OTEwOSwiZXhwIjoxNzg4NzAyNzA5fQ._7ZIXgLZBydcPb-liMOO8cFuGHldBjfuNe8V89eWlhc
 
-### Mentor views feedback
-GET http://localhost:5000/api/mentor/feedback
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdHVkZW50X2lkIjo0LCJlbWFpbCI6Im5ld3N0dWRlbnRAdGVzdC5jb20iLCJyb2xlIjoibWVudG9yIiwiaWF0IjoxNzkxNDg0MTgyLCJleHAiOjE3OTE0ODczODJ9.1V9f3uQzVpKoOUxvB7C_YdVy_5hzVGC5oY-M9hR1P_I
+### Student Notifications
+GET http://localhost:5000/api/notifications
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdHVkZW50X2lkIjoyLCJlbWFpbCI6Im5ld3N0dWRlbnRAZXhhbXBsZS5jb20iLCJyb2xlIjoic3R1ZGVudCIsImlhdCI6MTc4ODY5OTEwOSwiZXhwIjoxNzg4NzAyNzA5fQ._7ZIXgLZBydcPb-liMOO8cFuGHldBjfuNe8V89eWlhc
+
+### Mark Notification Read
+PUT http://localhost:5000/api/notifications/9/read
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdHVkZW50X2lkIjoyLCJlbWFpbCI6Im5ld3N0dWRlbnRAZXhhbXBsZS5jb20iLCJyb2xlIjoic3R1ZGVudCIsImlhdCI6MTc4ODY5OTEwOSwiZXhwIjoxNzg4NzAyNzA5fQ._7ZIXgLZBydcPb-liMOO8cFuGHldBjfuNe8V89eWlhc
+
+### Verify Notification Read Status
+GET http://localhost:5000/api/notifications
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdHVkZW50X2lkIjoyLCJlbWFpbCI6Im5ld3N0dWRlbnRAZXhhbXBsZS5jb20iLCJyb2xlIjoic3R1ZGVudCIsImlhdCI6MTc4ODY5OTEwOSwiZXhwIjoxNzg4NzAyNzA5fQ._7ZIXgLZBydcPb-liMOO8cFuGHldBjfuNe8V89eWlhc
+
+### Mark All Notifications Read
+PUT http://localhost:5000/api/notifications/read-all
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdHVkZW50X2lkIjoyLCJlbWFpbCI6Im5ld3N0dWRlbnRAZXhhbXBsZS5jb20iLCJyb2xlIjoic3R1ZGVudCIsImlhdCI6MTc4ODY5OTEwOSwiZXhwIjoxNzg4NzAyNzA5fQ._7ZIXgLZBydcPb-liMOO8cFuGHldBjfuNe8V89eWlhc
+
+### Verify All Notifications Read
+GET http://localhost:5000/api/notifications
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdHVkZW50X2lkIjoyLCJlbWFpbCI6Im5ld3N0dWRlbnRAZXhhbXBsZS5jb20iLCJyb2xlIjoic3R1ZGVudCIsImlhdCI6MTc4ODY5OTEwOSwiZXhwIjoxNzg4NzAyNzA5fQ._7ZIXgLZBydcPb-liMOO8cFuGHldBjfuNe8V89eWlhc
+
+### Student Privacy Settings
+GET http://localhost:5000/api/privacy-settings
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdHVkZW50X2lkIjoyLCJlbWFpbCI6Im5ld3N0dWRlbnRAZXhhbXBsZS5jb20iLCJyb2xlIjoic3R1ZGVudCIsImlhdCI6MTc4ODY5OTEwOSwiZXhwIjoxNzg4NzAyNzA5fQ._7ZIXgLZBydcPb-liMOO8cFuGHldBjfuNe8V89eWlhc
+
+### Mentor Login
+POST http://localhost:5000/api/login
+Content-Type: application/json
+
+{
+    "email": "testmentor2@gmail.com",
+    "password": "Test@12345"
+}
+
+### Mentor Browse Ideas
+GET http://localhost:5000/api/ideas
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJtZW50b3JfaWQiOjIsImVtYWlsIjoibmV3bWVudG9yQGV4YW1wbGUuY29tIiwicm9sZSI6Im1lbnRvciIsImlhdCI6MTc4ODY5OTUxMywiZXhwIjoxNzg4NzAzMTEzfQ.CY9CINZPipOq_cwg3DgOk__IkbCuAGJ8qRbG6TY-N0k
+
+### Mentor View Feedback
+GET http://localhost:5000/api/feedback
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJtZW50b3JfaWQiOjIsImVtYWlsIjoibmV3bWVudG9yQGV4YW1wbGUuY29tIiwicm9sZSI6Im1lbnRvciIsImlhdCI6MTc4ODY5OTUxMywiZXhwIjoxNzg4NzAzMTEzfQ.CY9CINZPipOq_cwg3DgOk__IkbCuAGJ8qRbG6TY-N0k
+
+### Mentor View Guidance Requests
+GET http://localhost:5000/api/mentor/guidance-requests
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJtZW50b3JfaWQiOjIsImVtYWlsIjoibmV3bWVudG9yQGV4YW1wbGUuY29tIiwicm9sZSI6Im1lbnRvciIsImlhdCI6MTc4ODY5OTUxMywiZXhwIjoxNzg4NzAzMTEzfQ.CY9CINZPipOq_cwg3DgOk__IkbCuAGJ8qRbG6TY-N0k
+
+### Mentor Accept Pending Guidance Request
+POST http://localhost:5000/api/mentor/guidance-requests/12/accept
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJtZW50b3JfaWQiOjIsImVtYWlsIjoibmV3bWVudG9yQGV4YW1wbGUuY29tIiwicm9sZSI6Im1lbnRvciIsImlhdCI6MTc4ODY5OTUxMywiZXhwIjoxNzg4NzAzMTEzfQ.CY9CINZPipOq_cwg3DgOk__IkbCuAGJ8qRbG6TY-N0k
+
+### Verify Accepted Guidance Request
+GET http://localhost:5000/api/mentor/guidance-requests
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJtZW50b3JfaWQiOjIsImVtYWlsIjoibmV3bWVudG9yQGV4YW1wbGUuY29tIiwicm9sZSI6Im1lbnRvciIsImlhdCI6MTc4ODY5OTUxMywiZXhwIjoxNzg4NzAzMTEzfQ.CY9CINZPipOq_cwg3DgOk__IkbCuAGJ8qRbG6TY-N0k
+
+### Verify Guidance Acceptance Notification
+GET http://localhost:5000/api/notifications
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdHVkZW50X2lkIjoyLCJlbWFpbCI6Im5ld3N0dWRlbnRAZXhhbXBsZS5jb20iLCJyb2xlIjoic3R1ZGVudCIsImlhdCI6MTc4ODY5OTEwOSwiZXhwIjoxNzg4NzAyNzA5fQ._7ZIXgLZBydcPb-liMOO8cFuGHldBjfuNe8V89eWlhc
+
+### Mentor Submit Feedback
+POST http://localhost:5000/api/feedback
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJtZW50b3JfaWQiOjIsImVtYWlsIjoibmV3bWVudG9yQGV4YW1wbGUuY29tIiwicm9sZSI6Im1lbnRvciIsImlhdCI6MTc4ODY5OTUxMywiZXhwIjoxNzg4NzAzMTEzfQ.CY9CINZPipOq_cwg3DgOk__IkbCuAGJ8qRbG6TY-N0k
+Content-Type: application/json
+
+{
+    "team_id": 2,
+    "comments": "The team is progressing well after receiving guidance.",
+    "suggestions": "Continue improving the API documentation and testing.",
+    "rating": 5
+}
+
+### Verify New Feedback Notification
+GET http://localhost:5000/api/notifications
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdHVkZW50X2lkIjoyLCJlbWFpbCI6Im5ld3N0dWRlbnRAZXhhbXBsZS5jb20iLCJyb2xlIjoic3R1ZGVudCIsImlhdCI6MTc4ODY5OTEwOSwiZXhwIjoxNzg4NzAyNzA5fQ._7ZIXgLZBydcPb-liMOO8cFuGHldBjfuNe8V89eWlhc
+
+### Verify New Feedback
+GET http://localhost:5000/api/feedback
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJtZW50b3JfaWQiOjIsImVtYWlsIjoibmV3bWVudG9yQGV4YW1wbGUuY29tIiwicm9sZSI6Im1lbnRvciIsImlhdCI6MTc4ODY5OTUxMywiZXhwIjoxNzg4NzAzMTEzfQ.CY9CINZPipOq_cwg3DgOk__IkbCuAGJ8qRbG6TY-N0k
