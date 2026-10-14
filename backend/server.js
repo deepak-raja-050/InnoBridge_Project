@@ -1129,6 +1129,31 @@ app.get("/api/students", authenticateToken, async (req, res) => {
     }
 });
 
+// Students can manage their own ideas, including ideas hidden from public discovery.
+app.get("/api/student/ideas", authenticateToken, async (req, res) => {
+    try {
+        if (req.user.role !== "student") {
+            return res.status(403).json({ message: "Only students can view their ideas" });
+        }
+
+        const ideas = await db.collection("ideas")
+            .find({ student_id: req.user.student_id })
+            .toArray();
+        const settings = await db.collection("privacy_settings")
+            .find({ student_id: req.user.student_id })
+            .toArray();
+        const visibilityByIdea = new Map(settings.map((setting) => [setting.idea_id, setting.visibility]));
+
+        res.status(200).json(ideas.map((idea) => ({
+            ...idea,
+            visibility: visibilityByIdea.get(idea._id.toString()) || "public"
+        })));
+    } catch (error) {
+        console.error(error);
+        res.status(500).json({ message: "Failed to fetch your ideas" });
+    }
+});
+
 // Get all ideas
 app.get("/api/ideas", async (req, res) => {
     try {
