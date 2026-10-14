@@ -5,8 +5,8 @@ React + Vite client for the student innovation platform. It provides separate st
 ## Run locally
 
 1. Start MongoDB on `127.0.0.1:27017`.
-2. In `../backend`, install dependencies and set `JWT_SECRET` in `.env`, then run `node server.js` (port `5000`).
-3. Copy `.env.example` to `.env` if your backend uses a different origin.
+2. In `../backend`, install dependencies and set `JWT_SECRET` in `.env`, then run `PORT=5001 JWT_SECRET=local-development-only-secret node server.js` (the default API port is `5000`; use `5001` if that port is already occupied).
+3. Set `VITE_API_URL=http://localhost:5001` when starting Vite if you run the backend on port `5001`.
 4. Install dependencies and start the frontend:
 
    ```sh
